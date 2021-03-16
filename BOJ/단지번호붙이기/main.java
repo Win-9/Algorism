@@ -1,5 +1,3 @@
-package por;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -18,15 +16,13 @@ class Solution{
 	  static int[]y_loc={0,0,1,-1};
 	  static int number;
 	  static int complex=0;
-	  static int count=0;
+	  static int count=1;
 	  public void solution() throws IOException{
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    ArrayList<Integer>list=new ArrayList<>();
 	    number=Integer.parseInt(br.readLine());
-	    int complex=0;
 	    int [][]map=new int[number][number];
 	    boolean[][]visited=new boolean[number][number];
-	    int count=0;
 	    for(int i=0;i<number;i++){
 	      String[]str=br.readLine().split("");
 	      for(int j=0;j<number;j++){
@@ -36,10 +32,9 @@ class Solution{
 	    for(int i=0;i<number;i++){
 	      for(int j=0;j<number;j++){
 	        if(!visited[i][j] && map[i][j]==1){
-	          count=bfs(visited,map,i,j);
-	          System.out.println("count:"+count);
+	          bfs(visited,map,i,j);
 	          list.add(count);
-	          count=0;
+	          count=1;
 	        }
 	      }
 	    }
@@ -49,7 +44,7 @@ class Solution{
 	    	System.out.println(list.get(i));
 	    }
 	  }
-	  public int bfs(boolean[][]visited,int[][]map,int i,int j){
+	  public void bfs(boolean[][]visited,int[][]map,int i,int j){
 	    Queue<Location>queue=new LinkedList<>();
 	    complex++;
 	    queue.add(new Location(i, j));
@@ -64,8 +59,6 @@ class Solution{
 	        }
 	      }
 	    }
-	    System.out.println("countt:"+count);
-	    return count;
 	  }
 	  public boolean check(boolean[][]visited,int ex1,int ex2,int[][]map){
 	    if((ex1>=0 && ex1<number)&&(ex2>=0 && ex2<number)&&!visited[ex1][ex2]&& map[ex1][ex2]==1){
