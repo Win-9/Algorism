@@ -7,8 +7,6 @@ NxN 크기의 시험관이 있다. 시험관은 1x1 크기의 칸으로 나누�
 
 예를 들어 다음과 같이 3x3 크기의 시험관이 있다고 하자. 서로 다른 1번, 2번, 3번 바이러스가 각각 (1,1), (1,3), (3,1)에 위치해 있다. 이 때 2초가 지난 뒤에 (3,2)에 존재하는 바이러스의 종류를 계산해보자.
 */
-package por;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,19 +14,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Queue;
-class Main {
-	  public static void main(String[] args) throws Exception {
-		  Solution s=new Solution();
-		  s.solution();
-	  }
-	}
-class Solution{
+
+class Main{
 	  static int[]x_loc={1,-1,0,0};
 	  static int[]y_loc={0,0,1,-1};
 	  static int number;
 	  static int second=0;
 	  static Queue<Location>queue=new LinkedList<>();
-	  public void solution() throws Exception{
+	  public static void main(String[]args) throws Exception{
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    ArrayList<Location>add_list=new ArrayList<Location>();
 	    String[] str=br.readLine().split(" ");
@@ -38,12 +31,13 @@ class Solution{
 	    boolean[][]visited=new boolean[number+1][number+1];
 	    int last_x=0;int last_y=0;
 	    for(int i=1;i<=number+1;i++){
-	      str=br.readLine().split("");
+	      str=br.readLine().split(" ");
 	      for(int j=0;j<number;j++){
 	    	  if(i==number+1) {
 	    		  second=Integer.parseInt(str[0]);
 	    		  last_x=Integer.parseInt(str[1]);
 	    		  last_y=Integer.parseInt(str[2]);
+	    		  break;
 	    	  }
 	    	  map[i][j+1]=Integer.parseInt(str[j]);
 	      }
@@ -59,7 +53,6 @@ class Solution{
 	    for(int i=0;i<add_list.size();i++) {
 	    	queue.add(add_list.get(i));
 	    }
-	    
 	    bfs(visited,map,add_list.get(0).x,add_list.get(0).y);
 	    if(map[last_x][last_y]==0) {
 	    	System.out.println("0");
@@ -68,7 +61,7 @@ class Solution{
 	    	System.out.println(map[last_x][last_y]);
 	    }
 	  }
-	  public void bfs(boolean[][]visited,int[][]map,int i,int j){
+	  static public void bfs(boolean[][]visited,int[][]map,int i,int j){
 		  visited[i][j]=true;
 		  while(queue.size()!=0) {
 			  Location loc=queue.poll();
@@ -85,8 +78,8 @@ class Solution{
 			  }
 		  }
 	  }
-	  public boolean check(boolean[][]visited,int ex1,int ex2,int[][]map){
-	    if((ex1>=0 && ex1<number)&&(ex2>=0 && ex2<number)&&!visited[ex1][ex2]){
+	  static public boolean check(boolean[][]visited,int ex1,int ex2,int[][]map){
+	    if((ex1>0 && ex1<=number)&&(ex2>0 && ex2<=number)&&!visited[ex1][ex2]){
 	      visited[ex1][ex2]=true;
 	      return true;
 	    }
@@ -107,12 +100,11 @@ class Location implements Comparable<Location>{
 	@Override
 	public int compareTo(Location loc) {
 		if(this.num-loc.num>0) {
-			return -1;
+			return 1;
 		}
 		else if(this.num-loc.num==0) {
 			return 0;
 		}
-		return 1;
+		return -1;
 	}
-	  
 }
