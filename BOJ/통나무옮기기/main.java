@@ -21,59 +21,74 @@ class Main{
 	    number=Integer.parseInt(str[0]);
 	    String [][]map=new String[number][number];
 	    boolean[][]visited=new boolean[number][number];
-	    int last_x=0;int last_y=0;
 	    for(int i=0;i<=number+1;i++){
 	      str=br.readLine().split(" ");
 	      for(int j=0;j<number;j++){
 	    	  map[i][j]=str[j];
 	      }
 	    }
-	    
 	  }
 	  static public void bfs(boolean[][]visited,int[][]map,int i,int j){
+		  Queue<All_Location>queue=new LinkedList<>();
 		  visited[i][j]=true;
 		  while(queue.size()!=0) {
-			  Location loc=queue.poll();
-			  if(loc.count==second) {
-				  break;
+			  if(turn()) {
+				  
 			  }
+			  All_Location loc=queue.poll();
 			  for(int k=0;k<4;k++) {
-				  int ex1=loc.x+x_loc[k];
-				  int ex2=loc.y+y_loc[k];
-				  if(check(visited,ex1,ex2,map)) {
+				  int ex1=loc.l1.getX()+x_loc[i];
+				  int ex2=loc.l1.getY()+y_loc[i];
+				  int ex3=loc.l2.getX()+x_loc[i];
+				  int ex4=loc.l2.getY()+y_loc[i];
+				  int ex5=loc.l3.getX()+x_loc[i];
+				  int ex6=loc.l3.getY()+y_loc[i];
+				  if(check(visited,ex1,ex2,map) && check(visited,ex3,ex4,map)
+						  &&check(visited,ex5,ex6,map)) {
+					  visited[ex1][ex2]=true;
+					  visited[ex3][ex4]=true;
+					  visited[ex5][ex6]=true;
 					  map[ex1][ex2]=loc.num;
-					  queue.add(new Location(ex1, ex2,loc.num,++loc.count));  
+					  queue.add(new All_Location(new Location(ex1,ex2),
+							  new Location(ex3,ex4), new Location(ex5,ex6)));  
 				  }
 			  }
 		  }
 	  }
 	  static public boolean check(boolean[][]visited,int ex1,int ex2,int[][]map){
 	    if((ex1>0 && ex1<=number)&&(ex2>0 && ex2<=number)&&!visited[ex1][ex2]){
-	      visited[ex1][ex2]=true;
 	      return true;
 	    }
 	    return false;
 	  }
-}
-class Location implements Comparable<Location>{
-	  int x;
-	  int y;
-	  int num;
-	  int count;
-	  Location(int x,int y,int num,int count){
-	    this.x=x;
-	    this.y=y;
-	    this.num=num;
-	    this.count=count;
+	  static public boolean turn() {
+		  
 	  }
-	@Override
-	public int compareTo(Location loc) {
-		if(this.num-loc.num>0) {
-			return 1;
-		}
-		else if(this.num-loc.num==0) {
-			return 0;
-		}
-		return -1;
+}
+class All_Location{
+	Location l1;
+	Location l2;
+	Location l3;
+	int count=0;
+	boolean shape=true;//'-'모양
+	All_Location(Location l1,Location l2,Location l3){
+		this.l1=l1;
+		this.l2=l2;
+		this.l3=l3;
+		++count;
+	}
+}
+class Location{
+	int x;
+	int y;
+	Location(int x,int y){
+		this.x=x;
+		this.y=y;
+	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
 	}
 }
