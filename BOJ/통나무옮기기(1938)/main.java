@@ -9,8 +9,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 class Main{
-	  static int[]x_loc={2,-2,0,0};
-	  static int[]y_loc={0,0,2,-2};
+	  static int[]case1_x_loc={2,-2,0,0};
+	  static int[]case1_y_loc={0,0,1,-1};
+	  static int[]case2_x_loc={1,-1,0,0};
+	  static int[]case2_y_loc={0,0,2,-2};
 	  static int number;
 	  static int second=0;
 	  static Queue<Location>queue=new LinkedList<>();
@@ -33,12 +35,38 @@ class Main{
 		  while(queue.size()!=0) {
 			  Location loc=queue.poll();
 			  if(loc.state==true) {
-				  
+				  for(int k=0;k<4;k++) {
+					  int ex1=loc.x+case1_x_loc[k];
+					  int ex2=loc.x+case1_y_loc[k];
+					  if(check(visited,ex1,ex2,map)) {
+						  if(case1_x_loc[k]<0)
+						  {
+							  visited[ex1+1][ex2]=true;
+							  queue.add(new Location(ex1+1, ex2));
+						  }
+						  else {
+							  visited[ex1-1][ex2]=true;
+							  queue.add(new Location(ex1-1, ex2));
+						  }
+					  }
+				  }
 			  }
-			  for(int k=0;k<4;k++) {
-				  int ex1=loc.x+x_loc[i];
-				  int ex2=loc.y+y_loc[i];
-				  
+			  else {
+				  for(int k=0;k<4;k++) {
+					  int ex1=loc.x+case2_x_loc[k];
+					  int ex2=loc.x+case2_y_loc[k];
+					  if(check(visited,ex1,ex2,map)) {
+						  if(case2_x_loc[k]<0)
+						  {
+							  visited[ex1+1][ex2]=true;
+							  queue.add(new Location(ex1+1, ex2));
+						  }
+						  else {
+							  visited[ex1-1][ex2]=true;
+							  queue.add(new Location(ex1-1, ex2));
+						  }
+					  }
+				  }
 			  }
 		  }
 	  }
@@ -49,7 +77,7 @@ class Main{
 	    return false;
 	  }
 	  static public boolean turn(Location loc) {
-		  
+		  if(loc.)
 	  }
 }
 class Location{
