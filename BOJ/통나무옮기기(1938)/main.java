@@ -18,24 +18,26 @@ class Main{
 	  static boolean contact=false;
 	  static Queue<Location>queue=new LinkedList<>();
 	  public static void main(String[]args) throws Exception{
-		Location[]start=new Location[2];
-		Location[]end=new Location[2];
+		Location[]start=new Location[3];
+		Location[]end=new Location[3];
 		int count=0;int count2=0;
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    String[] str=br.readLine().split(" ");
 	    number=Integer.parseInt(str[0]);
 	    String [][]map=new String[number][number];
 	    boolean[][]visited=new boolean[number][number];
-	    for(int i=0;i<=number+1;i++){
+	    for(int i=0;i<number+1;i++){
 	      str=br.readLine().split(" ");
 	      for(int j=0;j<number;j++){
 	    	  map[i][j]=str[j];
-	    	  if(map[i][j].equals("B")) {
+	    	  System.out.println("j:"+j);
+	    	  if(str[j].equals("B")) {
 	    		  start[count]=new Location(i,j);
 	    		  ++count;
+	    		  System.out.println("악!");
 	    	  }
-	    	  else if(map[i][j].equals("E")) {
-	    		  start[count2]=new Location(i,j);
+	    	  else if(str[j].equals("E")) {
+	    		  end[count2]=new Location(i,j);
 	    		  ++count2;
 	    	  }
 	      }
@@ -101,7 +103,7 @@ class Main{
 		  return 0;
 	  }
 	  static public boolean check(boolean[][]visited,int ex1,int ex2,String[][]map){
-	    if((ex1>=0 && ex1<=number)&&(ex2>=0 && ex2<=number)&&!visited[ex1][ex2]
+	    if((ex1>=0 && ex1<number)&&(ex2>=0 && ex2<number)&&!visited[ex1][ex2]
 	    		&& !map[ex1][ex2].equals("1")){
 	      return true;
 	    }
