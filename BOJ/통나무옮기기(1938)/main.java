@@ -22,21 +22,19 @@ class Main{
 		Location[]end=new Location[3];
 		int count=0;int count2=0;
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	    String[] str=br.readLine().split(" ");
-	    number=Integer.parseInt(str[0]);
+	    String str=br.readLine();
+	    number=Integer.parseInt(str);
 	    String [][]map=new String[number][number];
 	    boolean[][]visited=new boolean[number][number];
-	    for(int i=0;i<number+1;i++){
-	      str=br.readLine().split(" ");
+	    for(int i=0;i<number;i++){
+	      str=br.readLine();
 	      for(int j=0;j<number;j++){
-	    	  map[i][j]=str[j];
-	    	  System.out.println("j:"+j);
-	    	  if(str[j].equals("B")) {
+	    	  map[i][j]=Character.toString(str.charAt(j));
+	    	  if(Character.toString(str.charAt(j)).equals("B")) {
 	    		  start[count]=new Location(i,j);
 	    		  ++count;
-	    		  System.out.println("악!");
 	    	  }
-	    	  else if(str[j].equals("E")) {
+	    	  else if(Character.toString(str.charAt(j)).equals("E")) {
 	    		  end[count2]=new Location(i,j);
 	    		  ++count2;
 	    	  }
