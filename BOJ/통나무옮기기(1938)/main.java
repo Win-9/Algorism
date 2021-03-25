@@ -28,25 +28,29 @@ class Main{
 	    	  map[i][j]=str[j];
 	      }
 	    }
-	    
+	    bfs(visited,map,);
 	  }
-	  static public void bfs(boolean[][]visited,int[][]map,int i,int j){
+	  static public void bfs(boolean[][]visited,String[][]map,int i,int j){
 		  visited[i][j]=true;
 		  while(queue.size()!=0) {
 			  Location loc=queue.poll();
+			  if(turn(loc,map)) {
+				  loc.state=!loc.state;
+				  queue.add(new Location(loc.x, loc.y,loc.state));
+			  }
 			  if(loc.state==true) {
 				  for(int k=0;k<4;k++) {
 					  int ex1=loc.x+case1_x_loc[k];
 					  int ex2=loc.x+case1_y_loc[k];
-					  if(check(visited,ex1,ex2,map)) {
+					  if(check(visited,ex1,ex2)) {
 						  if(case1_x_loc[k]<0)
 						  {
 							  visited[ex1+1][ex2]=true;
-							  queue.add(new Location(ex1+1, ex2));
+							  queue.add(new Location(ex1+1, ex2,loc.state));
 						  }
 						  else {
 							  visited[ex1-1][ex2]=true;
-							  queue.add(new Location(ex1-1, ex2));
+							  queue.add(new Location(ex1-1, ex2,loc.state));
 						  }
 					  }
 				  }
@@ -55,38 +59,60 @@ class Main{
 				  for(int k=0;k<4;k++) {
 					  int ex1=loc.x+case2_x_loc[k];
 					  int ex2=loc.x+case2_y_loc[k];
-					  if(check(visited,ex1,ex2,map)) {
+					  if(check(visited,ex1,ex2)) {
 						  if(case2_x_loc[k]<0)
 						  {
 							  visited[ex1+1][ex2]=true;
-							  queue.add(new Location(ex1+1, ex2));
+							  queue.add(new Location(ex1+1, ex2,loc.state));
 						  }
 						  else {
 							  visited[ex1-1][ex2]=true;
-							  queue.add(new Location(ex1-1, ex2));
+							  queue.add(new Location(ex1-1, ex2,loc.state));
 						  }
 					  }
 				  }
 			  }
 		  }
 	  }
-	  static public boolean check(boolean[][]visited,int ex1,int ex2,int[][]map){
+	  static public boolean check(boolean[][]visited,int ex1,int ex2){
 	    if((ex1>0 && ex1<=number)&&(ex2>0 && ex2<=number)&&!visited[ex1][ex2]){
 	      return true;
 	    }
 	    return false;
 	  }
-	  static public boolean turn(Location loc) {
-		  if(loc.)
+	  static public boolean turn(Location loc,String[][]map) {
+		  if(loc.state==true) {
+			  for(int i=loc.y-1;i<3;i++) {
+				  for(int j=loc.x-1;j<3;j++) {
+					  if(i==loc.y && j==loc.x) {continue;}
+					  if(!map[i][j].equals("0")) {
+						  return false;
+					  }
+				  }
+			  }
+			  return true;
+		  }
+		  else {
+			  for(int i=loc.y-1;i<3;i++) {
+				  for(int j=loc.x-1;j<3;j++) {
+					  if(i==loc.y && j==loc.x) {continue;}
+					  if(!map[i][j].equals("0")) {
+						  return false;
+					  }
+				  }
+			  }
+			  return true;
+		  }
 	  }
 }
 class Location{
 	int x;
 	int y;
 	boolean state=true;//'-'모양
-	Location(int x,int y){
+	Location(int x,int y,boolean state){
 		this.x=x;
 		this.y=y;
+		this.state=state;
 	}
 	public int getX() {
 		return x;
