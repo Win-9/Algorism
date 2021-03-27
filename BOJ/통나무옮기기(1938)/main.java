@@ -68,6 +68,7 @@ class Main{
 					  int ex1=loc.x+case1_x_loc[k];
 					  int ex2=loc.x+case1_y_loc[k];
 					  if(check(visited,ex1,ex2,map)) {
+						  System.out.println("ex1:"+ex1+" ex2:"+ex2);
 						  if(case1_x_loc[k]<0)
 						  {
 							  visited[ex1+1][ex2]=true;
@@ -83,8 +84,9 @@ class Main{
 			  else {
 				  for(int k=0;k<4;k++) {
 					  int ex1=loc.x+case2_x_loc[k];
-					  int ex2=loc.x+case2_y_loc[k];
+					  int ex2=loc.y+case2_y_loc[k];
 					  if(check(visited,ex1,ex2,map)) {
+						  System.out.println("ex1:"+ex1+" ex2:"+ex2);
 						  if(case2_x_loc[k]<0)
 						  {
 							  visited[ex1+1][ex2]=true;
@@ -100,13 +102,20 @@ class Main{
 		  }
 		  return 0;
 	  }
-	  static public boolean check(boolean[][]visited,int ex1,int ex2,String[][]map){
+	  static public boolean check_A(boolean[][]visited,int ex1,int ex2,String[][]map){
 	    if((ex1>=0 && ex1<number)&&(ex2>=0 && ex2<number)&&!visited[ex1][ex2]
 	    		&& !map[ex1][ex2].equals("1")){
 	      return true;
 	    }
 	    return false;
-	  }
+	  }//가로이동
+	  static public boolean check_B(boolean[][]visited,int ex1,int ex2,String[][]map){
+		 if((ex1>=0 && ex1<number)&&(ex2>=0 && ex2<number)&&!visited[ex1][ex2]
+		    	&& !map[ex1][ex2].equals("1")){
+		      return true;
+		  }
+		    return false;
+	  }//세로이동
 	  static public boolean turn(Location loc,String[][]map) {
 		  if(loc.state==true) {
 			  for(int i=loc.y-1;i<3;i++) {
@@ -123,8 +132,12 @@ class Main{
 			  for(int i=loc.y-1;i<3;i++) {
 				  for(int j=loc.x-1;j<3;j++) {
 					  if(i==loc.y && j==loc.x) {continue;}
-					  if(!map[i][j].equals("0")) {
-						  return false;
+					  try {
+						  if(!map[i][j].equals("0")) {
+							  return false;
+						  }
+					  }catch(Exception e) {
+						  continue;
 					  }
 				  }
 			  }
