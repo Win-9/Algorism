@@ -29,6 +29,8 @@ a	b	c	d
 0 0 0 0 0 0
 문제는 통나무를 5개의 기본동작(U, D, L, R, T)만을 사용하여 처음위치(BBB)에서 최종위치(EEE)로 옮기는 프로그램을 작성하는 것이다. 단, 최소 횟수의 단위 동작을 사용해야 한다.
 
+	
+	
 package por;
 
 import java.io.BufferedReader;
@@ -174,7 +176,7 @@ class Main{
 			  for(int i=loc.y-1;i<3;i++) {
 				  for(int j=loc.x-1;j<3;j++) {
 					  if(i==loc.y && j==loc.x) {continue;}
-					  if(!map[i][j].equals("0")) {
+					  if(!map[i][j].equals("0") && ) {//좌표의 설정도 해주어야됨.
 						  return false;
 					  }
 				  }
