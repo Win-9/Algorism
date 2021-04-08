@@ -73,7 +73,7 @@ class Main{
 	    	  }
 	      }
 	    }
-	    if(start[1].x==start[0].x-1) {
+	    if(start[1].x==start[0].x-1) {//'|'shape
 	    	count=bfs(visited,map,start[1].x,start[1].y,true,end[1].x,end[1].y);
 	    }
 	    else {
@@ -99,8 +99,8 @@ class Main{
 				  for(int k=0;k<4;k++) {
 					  int ex1=loc.x+case1_x_loc[k];
 					  int ex2=loc.x+case1_y_loc[k];
-					  if(check_A(visited,ex1,ex2,map)) {
-						  System.out.println("ex1:"+ex1+" ex2:"+ex2);
+					  if(check_A(visited,ex1,ex2,map)) {//'-'shape
+						  System.out.println("A:ex1:"+ex1+" ex2:"+ex2);
 						  if(case1_x_loc[k]<0)
 						  {
 							  visited[ex1+1][ex2]=true;
@@ -110,11 +110,9 @@ class Main{
 							  visited[ex1-1][ex2]=true;
 							  queue.add(new Location(ex1-1, ex2,loc.state,loc.count+1));
 						  }
-						  else {
-							  if(!map[ex1][ex2-1].equals("1") && !map[ex1][ex2+1].equals("1")) {
-								  visited[ex1][ex2]=true;
-								  queue.add(new Location(ex1, ex2,loc.state,loc.count+1));
-							  }
+						  else {//'y'이동
+							  visited[ex1][ex2]=true;
+							  queue.add(new Location(ex1, ex2,loc.state,loc.count+1));
 						  }
 					  }
 				  }
@@ -123,8 +121,8 @@ class Main{
 				  for(int k=0;k<4;k++) {
 					  int ex1=loc.x+case2_x_loc[k];
 					  int ex2=loc.y+case2_y_loc[k];
-					  if(check_B(visited,ex1,ex2,map)) {
-						  System.out.println("ex1:"+ex1+" ex2:"+ex2);
+					  if(check_B(visited,ex1,ex2,map)) {//'|'shape
+						  System.out.println("B:ex1:"+ex1+" ex2:"+ex2);
 						  if(case2_y_loc[k]<0)
 						  {
 							  visited[ex1][ex2+1]=true;
@@ -134,11 +132,9 @@ class Main{
 							  visited[ex1][ex2-1]=true;
 							  queue.add(new Location(ex1, ex2-1,loc.state,loc.count+1));
 						  }
-						  else {
-							  if(!map[ex1-1][ex2].equals("1") && !map[ex1+1][ex2].equals("1")) {
-								  visited[ex1][ex2]=true;
-								  queue.add(new Location(ex1, ex2,loc.state,loc.count+1));
-							  }
+						  else {//'x'이동
+							  visited[ex1][ex2]=true;
+							  queue.add(new Location(ex1, ex2,loc.state,loc.count+1));
 						  }
 					  }
 				  }
@@ -162,24 +158,32 @@ class Main{
 	  }//세로이동
 	  static public boolean turn(Location loc,String[][]map) {
 		  if(loc.state==true) {
-			  for(int i=loc.y-1;i<3;i++) {
-				  for(int j=loc.x-1;j<3;j++) {
+			  int i=loc.y-1;
+			  int j=loc.x-1;
+			  for(int s1=0;s1<3;s1++) {
+				  for(int s2=0;s2<3;s2++) {
 					  if(i==loc.y && j==loc.x) {continue;}
-					  if(!map[i][j].equals("0")) {
+					  if((i-1>=0) || (i+1)<=number-1 ||!map[i][j].equals("0")) {
 						  return false;
 					  }
+					  j++;
 				  }
+				  i++;
 			  }
 			  return true;
 		  }
 		  else {
-			  for(int i=loc.y-1;i<3;i++) {
-				  for(int j=loc.x-1;j<3;j++) {
+			  int i=loc.x-1;
+			  int j=loc.y-1;
+			  for(int s1=0;s1<3;s1++) {
+				  for(int s2=0;s2<3;s2++) {
 					  if(i==loc.y && j==loc.x) {continue;}
-					  if(!map[i][j].equals("0") && ) {//좌표의 설정도 해주어야됨.
+					  if((i-1>=0) || (i+1)<=number-1 || !map[i][j].equals("0")) {
 						  return false;
 					  }
+					  j++;
 				  }
+				  i++;
 			  }
 			  return true;
 		  }
@@ -188,7 +192,7 @@ class Main{
 class Location{
 	int x;
 	int y;
-	boolean state=true;//'-'모양
+	boolean state=true;//'-'shape
 	int count;
 	Location(int x,int y,boolean state,int count){
 		this.x=x;
