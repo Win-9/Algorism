@@ -89,6 +89,7 @@ class Main{
 		  while(queue.size()!=0) {
 			  loc=queue.poll();
 			  if(loc.x==end1 && loc.y==end2) {
+				  System.out.println("END");
 				  return loc.count;
 			  }
 			  if(turn(loc,map)) {
@@ -138,7 +139,7 @@ class Main{
 						  }
 					  }
 				  }
-				  System.out.println("=======");
+				  System.out.println("=========");
 			  }
 		  }
 		  return 0;
@@ -165,26 +166,29 @@ class Main{
 			  for(int s1=0;s1<3;s1++) {
 				  for(int s2=0;s2<3;s2++) {
 					  if(i==loc.y && j==loc.x) {continue;}
-					  if((j-1<0) || (j+1)>number-1 || map[i][j].equals("1")) {
+					  if((i-1<0) || (i+1)>number-1 || map[j][i].equals("1")) {
 						  return false;
 					  }
 					  j++;
 				  }
 				  i++;
+				  j=loc.x-1;
 			  }
 			  return true;
 		  }
 		  else {
-			  int i=loc.x-1;
-			  int j=loc.y-1;
+			  int i=loc.y-1;
+			  int j=loc.x-1;
 			  for(int s1=0;s1<3;s1++) {
 				  for(int s2=0;s2<3;s2++) {
-					  if((i-1<0) || (i+1)>number-1 || map[i][j].equals("1")) {
+					  if((j-1<0) || (j+1)>number-1 || map[j][i].equals("1")) {
+						  System.out.println("i:"+i+"j:"+j);
 						  return false;
 					  }
 					  j++;
 				  }
 				  i++;
+				  j=loc.x-1;
 			  }
 			  return true;
 		  }
