@@ -88,13 +88,16 @@ class Main{
 		  queue.add(new Location(i,j,state,0));
 		  while(queue.size()!=0) {
 			  loc=queue.poll();
+			  try {
+				  Thread.sleep(800);
+			  }catch(Exception e) {}
 			  if(loc.x==end1 && loc.y==end2) {
 				  System.out.println("END");
 				  return loc.count;
 			  }
 			  if(turn(loc,map)) {
 				  loc.state=!loc.state;
-				  queue.add(new Location(loc.x, loc.y,loc.state,loc.count));
+				  queue.add(new Location(loc.x, loc.y,loc.state,loc.count+1));
 			  }
 			  if(loc.state==true) {
 				  for(int k=0;k<4;k++) {
@@ -102,8 +105,7 @@ class Main{
 					  int ex2=loc.x+case1_y_loc[k];
 					  if(check_A(visited,ex1,ex2,map)) {//'-'shape
 						  System.out.println("A:ex1:"+ex1+" ex2:"+ex2);
-						  if(case1_x_loc[k]<0)
-						  {
+						  if(case1_x_loc[k]<0){
 							  visited[ex1+1][ex2]=true;
 							  queue.add(new Location(ex1+1, ex2,loc.state,loc.count+1));
 						  }
@@ -124,8 +126,7 @@ class Main{
 					  int ex2=loc.y+case2_y_loc[k];
 					  if(check_B(visited,ex1,ex2,map)) {//'|'shape
 						  System.out.println("B:ex1:"+ex1+" ex2:"+ex2);
-						  if(case2_y_loc[k]<0)
-						  {
+						  if(case2_y_loc[k]<0) {
 							  visited[ex1][ex2+1]=true;
 							  queue.add(new Location(ex1, ex2+1,loc.state,loc.count+1));
 						  }
@@ -164,7 +165,7 @@ class Main{
 			  int j=loc.x-1;
 			  for(int s1=0;s1<3;s1++) {
 				  for(int s2=0;s2<3;s2++) {
-					  if(j>number-1||j<0||(i<0) || (i)>number-1 || map[j][i].equals("1")) {
+					  if(j>number-1||j<0||(i<0) || i>number-1 || map[j][i].equals("1")) {
 						  return false;
 					  }
 					  j++;
@@ -180,7 +181,7 @@ class Main{
 			  System.out.println("state:"+loc.state+" xy:"+j+" "+i);
 			  for(int s1=0;s1<3;s1++) {
 				  for(int s2=0;s2<3;s2++) {
-					  if(i>number-1||i<0||j<0 || (j)>number-1 || map[j][i].equals("1")) {
+					  if(i>number-1||i<0||j<0 || j>number-1 || map[j][i].equals("1")) {
 						  System.out.println("i:"+i+"j:"+j);
 						  return false;
 					  }
