@@ -159,14 +159,12 @@ class Main{
 		    return false;
 	  }//세로이동
 	  static public boolean turn(Location loc,String[][]map) {
-		  System.out.println("state:"+loc.state+" xy:"+loc.x+" "+loc.y);
 		  if(loc.state==true) {
 			  int i=loc.y-1;
 			  int j=loc.x-1;
 			  for(int s1=0;s1<3;s1++) {
 				  for(int s2=0;s2<3;s2++) {
-					  if(i==loc.y && j==loc.x) {continue;}
-					  if((i-1<0) || (i+1)>number-1 || map[j][i].equals("1")) {
+					  if(j>number-1||j<0||(i<0) || (i)>number-1 || map[j][i].equals("1")) {
 						  return false;
 					  }
 					  j++;
@@ -179,9 +177,10 @@ class Main{
 		  else {
 			  int i=loc.y-1;
 			  int j=loc.x-1;
+			  System.out.println("state:"+loc.state+" xy:"+j+" "+i);
 			  for(int s1=0;s1<3;s1++) {
 				  for(int s2=0;s2<3;s2++) {
-					  if((j-1<0) || (j+1)>number-1 || map[j][i].equals("1")) {
+					  if(i>number-1||i<0||j<0 || (j)>number-1 || map[j][i].equals("1")) {
 						  System.out.println("i:"+i+"j:"+j);
 						  return false;
 					  }
