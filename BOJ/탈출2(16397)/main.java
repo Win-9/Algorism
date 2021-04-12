@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class bj {
-
+	static String message;
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,6 +29,7 @@ public class bj {
 	    list[1].add(false);
 	    
 	    bfs(list,0,visited,N,T);
+	    System.out.println(message);
 	    
 	}
 	
@@ -36,18 +37,17 @@ public class bj {
 		visited[v]=true;//visited[0]=>A,visited[1]=>B
 		Queue<Func>queue=new LinkedList<>();
 		queue.add(new Func(visited[v],N,0));
-		Func f=queue.poll();
-		while(f.getCount()>T) {
+		Func f=null;
+		while(f.getCount()<T) {
+			f=queue.poll();
 			queue.add(new Func(true,N,f.count+1));
 			queue.add(new Func(false,N,f.count+1));
-			f=queue.poll();
 		}
-		
 	}
 }
 
 class Func{
-	int count;
+	int count=1;
 	int num;
 	
 	Func(boolean where,int num,int count){
