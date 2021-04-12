@@ -22,7 +22,7 @@ public class bj {
 	    boolean[]visited=new boolean[2];
 	    ArrayList[] list=new ArrayList[2];
 	    for(int i=0;i<2;i++) {
-	    	list[i]=new ArrayList<Boolean>();
+	    	list[i]=new ArrayList<Func>();
 	    }
 	    
 	    list[0].add(true);
@@ -34,27 +34,30 @@ public class bj {
 	
 	static public void bfs(ArrayList[]list,int v, boolean[]visited,int N,int T) {
 		visited[v]=true;//visited[0]=>A,visited[1]=>B
-		Queue<Integer>queue=new LinkedList<>();
-		queue.add(Func(visited[v],N));
-		for(int i=1;i<T;i++) {
-			int w=queue.poll();
-			Iterator iter=list[v].iterator();
-			while(iter.hasNext()) {
-				Object nex=iter.next();
-				queue.add(Func((boolean)nex, w));
-			}
+		Queue<Func>queue=new LinkedList<>();
+		queue.add(new Func(visited[v],N,0));
+		Func f=queue.poll();
+		while(f.getCount()>T) {
+			queue.add(new Func(true,N,f.count+1));
+			queue.add(new Func(false,N,f.count+1));
+			f=queue.poll();
 		}
-		
 		
 	}
+}
+
+class Func{
+	int count;
+	int num;
 	
-	static public int Func(boolean where,int a) {
+	Func(boolean where,int num,int count){
+		this.count=count;
 		if(where) {
-			a+=1;
-			return a;
+			this.num+=1;
+			return;
 		}
 		StringBuilder sb=new StringBuilder();
-		String []b=Integer.toString(a*2).split("");
+		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
 		if(c<0) {
 			for(int i=1;i<b.length;i++) {
@@ -67,7 +70,10 @@ public class bj {
 				sb.append(b[i]);
 			}
 		}
-		
-		return Integer.parseInt(sb.toString());
+		this.num=Integer.parseInt(sb.toString());
+	}
+	
+	public int getCount() {
+		return count;
 	}
 }
