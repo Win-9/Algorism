@@ -28,52 +28,69 @@ public class bj {
 	    list[0].add(true);
 	    list[1].add(false);
 	    
-	    bfs(list,0,visited,N,T);
+	    bfs(list,0,visited,N,T,G);
 	    System.out.println(message);
 	    
 	}
 	
-	static public void bfs(ArrayList[]list,int v, boolean[]visited,int N,int T) {
+	static public String bfs(ArrayList[]list,int v, boolean[]visited,int N,int T,int G) {
 		visited[v]=true;//visited[0]=>A,visited[1]=>B
 		Queue<Func>queue=new LinkedList<>();
 		queue.add(new Func(visited[v],N,0));
 		Func f=null;
 		while(f.getCount()<T) {
 			f=queue.poll();
+			if(N==G) {
+				break;
+			}
+			else if(f.boom==false) {
+				return "ANG";
+			}
 			queue.add(new Func(true,N,f.count+1));
 			queue.add(new Func(false,N,f.count+1));
 		}
+		return Integer.toString(f.count);
 	}
 }
 
 class Func{
 	int count=1;
 	int num;
-	
+	boolean boom;
 	Func(boolean where,int num,int count){
 		this.count=count;
 		if(where) {
 			this.num+=1;
 			return;
 		}
+		if(num*2>99999) {
+			this.boom=false;
+			return;
+		}
 		StringBuilder sb=new StringBuilder();
 		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
-		if(c<0) {
+		if(c<=0) {
 			for(int i=1;i<b.length;i++) {
 				sb.append(b[i]);
 			}
+			this.num=Integer.parseInt(sb.toString());
 		}
 		else {
 			sb.append(Integer.toString(c));
 			for(int i=1;i<b.length;i++) {
 				sb.append(b[i]);
 			}
+			this.num=Integer.parseInt(sb.toString());
 		}
-		this.num=Integer.parseInt(sb.toString());
+		
 	}
 	
 	public int getCount() {
 		return count;
+	}
+	
+	public void setBoom() {
+		this.boom=true;
 	}
 }
