@@ -10,6 +10,7 @@ import java.util.Queue;
 
 public class bj {
 	static String message;
+	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,20 +21,13 @@ public class bj {
 	    int G=Integer.parseInt(str[2]);//G:결과값
 	    
 	    boolean[]visited=new boolean[2];
-	    ArrayList[] list=new ArrayList[2];
-	    for(int i=0;i<2;i++) {
-	    	list[i]=new ArrayList<Func>();
-	    }
 	    
-	    list[0].add(true);
-	    list[1].add(false);
-	    
-	    bfs(list,0,visited,N,T,G);
+	    message=bfs(0,visited,N,T,G);
 	    System.out.println(message);
 	    
 	}
 	
-	static public String bfs(ArrayList[]list,int v, boolean[]visited,int N,int T,int G) {
+	static public String bfs(int v, boolean[]visited,int N,int T,int G) {
 		visited[v]=true;//visited[0]=>A,visited[1]=>B
 		Queue<Func>queue=new LinkedList<>();
 		queue.add(new Func(visited[v],N,0));
