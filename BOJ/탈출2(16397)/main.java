@@ -46,45 +46,38 @@ public class bj {
 		do {
 			f=queue.poll();
 			System.out.println("boom:"+f.boom+" N:"+f.num);
+			
 			if(N==G) {
-				break;
+				return Integer.toString(f.count);
 			}
-			else if(f.boom==false) {
-				return "ANG";
-			}
-			queue.add(new Func(true,N,f.count+1));
-			queue.add(new Func(false,N,f.count+1));
-			System.out.println("wow");
-		}while(f.getCount()<T);
-		return Integer.toString(f.count);
+			queue.add(new Func(true,f.getNum(),f.count+1));
+			queue.add(new Func(false,f.getNum(),f.count+1));
+			System.out.println("========"+f.count+"=======");
+		}while(f.getCount()<T || f.boom==false);
+		
+		return "ANG";
 	}
 }
 
 class Func{
-	int count=1;
+	int count;
 	int num;
 	boolean boom=true;
 	Func(boolean where,int num,int count){
+		this.count=count;
 		if(num*2>99999) {
 			this.boom=false;
 			return;
 		}
-		this.count=count;
 		if(where) {//A button
-			this.num+=1;
+			this.num=(num+1);
 			return;
 		}
 		else {
 			StringBuilder sb=new StringBuilder();
 			String []b=Integer.toString(num*2).split("");
 			int c=Integer.parseInt(b[0])-1;
-			if(c<=0) {//B button
-				for(int i=1;i<b.length;i++) {
-					sb.append(b[i]);
-				}
-				this.num=Integer.parseInt(sb.toString());
-			}
-			else {
+			if(c==0) {//B button
 				sb.append(Integer.toString(c));
 				for(int i=1;i<b.length;i++) {
 					sb.append(b[i]);
@@ -99,7 +92,8 @@ class Func{
 		return count;
 	}
 	
-	public void setBoom() {
-		this.boom=true;
+	public int getNum() {
+		return num;
 	}
 }
+
