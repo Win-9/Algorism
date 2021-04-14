@@ -27,24 +27,25 @@ public class bj {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	    String[]str=br.readLine().split("");
+	    String[]str=br.readLine().split(" ");
 	    
 	    int N=Integer.parseInt(str[0]);//N:기본값
 	    int T=Integer.parseInt(str[1]);//T총횟수
 	    int G=Integer.parseInt(str[2]);//G:결과값
 	    	    
-	    message=bfs(0,N,T,G);
+	    message=bfs(N,T,G);
 	    System.out.println(message);
 	    
 	}
 	
-	static public String bfs(int v, int N,int T,int G) {
+	static public String bfs(int N,int T,int G) {
 		Queue<Func>queue=new LinkedList<>();
 		queue.add(new Func(true,N,0));
 		queue.add(new Func(false,N,0));
 		Func f=null;
 		do {
 			f=queue.poll();
+			System.out.println("boom:"+f.boom+" N:"+f.num);
 			if(N==G) {
 				break;
 			}
@@ -53,7 +54,8 @@ public class bj {
 			}
 			queue.add(new Func(true,N,f.count+1));
 			queue.add(new Func(false,N,f.count+1));
-		}while(f.getCount()<T) ;
+			System.out.println("wow");
+		}while(f.getCount()<T);
 		return Integer.toString(f.count);
 	}
 }
@@ -61,7 +63,7 @@ public class bj {
 class Func{
 	int count=1;
 	int num;
-	boolean boom;
+	boolean boom=true;
 	Func(boolean where,int num,int count){
 		if(num*2>99999) {
 			this.boom=false;
