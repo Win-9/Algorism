@@ -23,7 +23,6 @@ import java.util.Queue;
 
 public class bj {
 	static String message;
-	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,54 +39,74 @@ public class bj {
 	
 	static public String bfs(int N,int T,int G) {
 		Queue<Func>queue=new LinkedList<>();
-		queue.add(new Func(true,N,0));
-		queue.add(new Func(false,N,0));
+		boolean[]visited=new boolean[10000];
+		queue.add(new Func(true,N,0,visited));
+		queue.add(new Func(false,N,0,visited));
 		Func f=null;
 		do {
 			f=queue.poll();
 			System.out.println("boom:"+f.boom+" N:"+f.num);
-			
-			if(N==G) {
-				return Integer.toString(f.count);
+			if(f.getNum()==G) {
+				return Integer.toString(f.count-1);
 			}
-			queue.add(new Func(true,f.getNum(),f.count+1));
-			queue.add(new Func(false,f.getNum(),f.count+1));
+			
+			if(f.ButtonA(f.getNum(), visited)) {
+				queue.add(new Func(true,f.getNum(),f.getCount()+1,visited));
+
+			}
+			else if(f.ButtonB(f.getNum(), visited)) {
+				queue.add(new Func(false,f.getNum(),f.getCount()+1,visited));
+
+			}
 			System.out.println("========"+f.count+"=======");
-		}while(f.getCount()<T || f.boom==false);
+		}while(f.getCount()<=T || f.boom==false);
 		
 		return "ANG";
 	}
 }
 
 class Func{
+	static int ex1;//A
+	static int ex2;//B
 	int count;
 	int num;
 	boolean boom=true;
-	Func(boolean where,int num,int count){
+	Func(boolean where,int num,int count,boolean[]visited){
 		this.count=count;
 		if(num*2>99999) {
 			this.boom=false;
+			visited[num]=true;
 			return;
 		}
 		if(where) {//A button
-			this.num=(num+1);
+			this.num=ex1;
+			visited[ex1]=true;
 			return;
 		}
 		else {
-			StringBuilder sb=new StringBuilder();
-			String []b=Integer.toString(num*2).split("");
-			int c=Integer.parseInt(b[0])-1;
-			if(c==0) {//B button
-				sb.append(Integer.toString(c));
-				for(int i=1;i<b.length;i++) {
-					sb.append(b[i]);
-				}
-				this.num=Integer.parseInt(sb.toString());
-			}
+			this.num=ex2;
+			visited[this.num]=true;
 		}
 		
 	}
 	
+	public boolean ButtonA(int num,boolean[] visited) {
+		int ex1=(num+1);
+		return visited[ex1];
+	}
+	
+	public boolean ButtonB(int num,boolean[] visited) {
+		StringBuilder sb=new StringBuilder();
+		String []b=Integer.toString(num*2).split("");
+		int c=Integer.parseInt(b[0])-1;
+		sb.append(Integer.toString(c));
+		for(int i=1;i<b.length;i++) {
+			sb.append(b[i]);
+		}
+		int ex2=Integer.parseInt(sb.toString());
+		System.out.println("ex2:"+ex2);
+		return visited[ex2];
+	}
 	public int getCount() {
 		return count;
 	}
@@ -96,4 +115,3 @@ class Func{
 		return num;
 	}
 }
-
