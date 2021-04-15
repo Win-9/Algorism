@@ -95,6 +95,7 @@ class Func{
 	}
 	
 	public boolean ButtonA(int num,boolean[] visited) {
+		System.out.println("AAAA:nnum:"+num);
 		int ex1=(num+1);
 		return visited[ex1];
 	}
@@ -103,7 +104,7 @@ class Func{
 		StringBuilder sb=new StringBuilder();
 		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
-		System.out.println("nnum:"+num+" c:"+c);
+		System.out.println("BBBB:nnum:"+num+" c:"+c);
 		if(c<=0) {
 			ex2=0;
 			return visited[0];
