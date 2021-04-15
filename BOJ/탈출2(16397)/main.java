@@ -40,24 +40,25 @@ public class bj {
 	static public String bfs(int N,int T,int G) {
 		Queue<Func>queue=new LinkedList<>();
 		boolean[]visited=new boolean[10000];
-		queue.add(new Func(true,N,0,visited));
-		queue.add(new Func(false,N,0,visited));
+		visited[N]=true;
+		queue.add(new Func(N,0));
 		Func f=null;
 		do {
 			f=queue.poll();
-			System.out.println("boom:"+f.boom+" N:"+f.num);
+			System.out.println("num:"+f.getNum()+" count:"+f.getCount());
 			if(f.getNum()==G) {
 				return Integer.toString(f.count-1);
 			}
 			
 			if(f.ButtonA(f.getNum(), visited)) {
-				queue.add(new Func(true,f.getNum(),f.getCount()+1,visited));
+				queue.add(new Func(true,f.ex1,f.getCount()+1,visited));
 
 			}
-			else if(f.ButtonB(f.getNum(), visited)) {
-				queue.add(new Func(false,f.getNum(),f.getCount()+1,visited));
+			if(f.ButtonB(f.getNum(), visited)) {
+				queue.add(new Func(false,f.ex2,f.getCount()+1,visited));
 
 			}
+			
 			System.out.println("========"+f.count+"=======");
 		}while(f.getCount()<=T || f.boom==false);
 		
@@ -66,11 +67,15 @@ public class bj {
 }
 
 class Func{
-	static int ex1;//A
-	static int ex2;//B
+	int ex1;
+	int ex2;
 	int count;
 	int num;
 	boolean boom=true;
+	Func(int num,int count){
+		this.num=num;
+		this.count=count;
+	}
 	Func(boolean where,int num,int count,boolean[]visited){
 		this.count=count;
 		if(num*2>99999) {
@@ -87,7 +92,6 @@ class Func{
 			this.num=ex2;
 			visited[this.num]=true;
 		}
-		
 	}
 	
 	public boolean ButtonA(int num,boolean[] visited) {
@@ -99,14 +103,20 @@ class Func{
 		StringBuilder sb=new StringBuilder();
 		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
+		System.out.println("nnum:"+num+" c:"+c);
+		if(c<=0) {
+			ex2=0;
+			return visited[0];
+		}
 		sb.append(Integer.toString(c));
 		for(int i=1;i<b.length;i++) {
 			sb.append(b[i]);
 		}
-		int ex2=Integer.parseInt(sb.toString());
 		System.out.println("ex2:"+ex2);
+		ex2=Integer.parseInt(sb.toString());
 		return visited[ex2];
 	}
+	
 	public int getCount() {
 		return count;
 	}
