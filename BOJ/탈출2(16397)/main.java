@@ -44,19 +44,21 @@ public class bj {
 		queue.add(new Func(N,0));
 		Func f=null;
 		do {
+			System.out.println("size:"+queue.size());
 			f=queue.poll();
 			System.out.println("num:"+f.getNum()+" count:"+f.getCount());
 			if(f.getNum()==G) {
 				return Integer.toString(f.count-1);
 			}
 			
-			if(f.ButtonA(f.getNum(), visited)) {
+			if(!f.ButtonA(f.getNum(), visited)) {
+				System.out.println("exex1:"+f.ex1);
 				queue.add(new Func(true,f.ex1,f.getCount()+1,visited));
 
 			}
-			if(f.ButtonB(f.getNum(), visited)) {
+			if(!f.ButtonB(f.getNum(), visited)) {
+				System.out.println("exex2:"+f.ex2);
 				queue.add(new Func(false,f.ex2,f.getCount()+1,visited));
-
 			}
 			
 			System.out.println("========"+f.count+"=======");
@@ -86,17 +88,17 @@ class Func{
 		if(where) {//A button
 			this.num=ex1;
 			visited[ex1]=true;
-			return;
 		}
 		else {
 			this.num=ex2;
+			System.out.println("thisnum:"+this.num);
 			visited[this.num]=true;
 		}
 	}
 	
 	public boolean ButtonA(int num,boolean[] visited) {
-		System.out.println("AAAA:nnum:"+num);
-		int ex1=(num+1);
+		ex1=(num+1);
+		System.out.println("AAAA:ex1:"+ex1);
 		return visited[ex1];
 	}
 	
@@ -104,17 +106,18 @@ class Func{
 		StringBuilder sb=new StringBuilder();
 		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
-		System.out.println("BBBB:nnum:"+num+" c:"+c);
+		System.out.println("BBBB:nnum:"+num*2+" c:"+c);
 		if(c<=0) {
 			ex2=0;
+			this.num=ex2;
 			return visited[0];
 		}
 		sb.append(Integer.toString(c));
 		for(int i=1;i<b.length;i++) {
 			sb.append(b[i]);
 		}
-		System.out.println("ex2:"+ex2);
 		ex2=Integer.parseInt(sb.toString());
+		System.out.println("ex2:"+ex2);
 		return visited[ex2];
 	}
 	
@@ -126,3 +129,4 @@ class Func{
 		return num;
 	}
 }
+
