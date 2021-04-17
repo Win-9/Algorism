@@ -48,13 +48,12 @@ public class bj {
 			f=queue.poll();
 			System.out.println("num:"+f.getNum()+" count:"+f.getCount());
 			if(f.getNum()==G) {
-				return Integer.toString(f.count-1);
+				return Integer.toString(f.count);
 			}
 			
 			if(!f.ButtonA(f.getNum(), visited)) {
 				System.out.println("exex1:"+f.ex1);
 				queue.add(new Func(true,f.ex1,f.getCount()+1,visited));
-
 			}
 			if(!f.ButtonB(f.getNum(), visited)) {
 				System.out.println("exex2:"+f.ex2);
@@ -86,11 +85,11 @@ class Func{
 			return;
 		}
 		if(where) {//A button
-			this.num=ex1;
+			this.num=num;
 			visited[ex1]=true;
 		}
 		else {
-			this.num=ex2;
+			this.num=num;
 			System.out.println("thisnum:"+this.num);
 			visited[this.num]=true;
 		}
@@ -129,4 +128,3 @@ class Func{
 		return num;
 	}
 }
-
