@@ -39,7 +39,7 @@ public class bj {
 	
 	static public String bfs(int N,int T,int G) {
 		Queue<Func>queue=new LinkedList<>();
-		boolean[]visited=new boolean[10000];
+		boolean[]visited=new boolean[100000];
 		visited[N]=true;
 		queue.add(new Func(N,0));
 		Func f=null;
@@ -90,7 +90,6 @@ class Func{
 		}
 		else {
 			this.num=num;
-			System.out.println("thisnum:"+this.num);
 			visited[this.num]=true;
 		}
 	}
@@ -106,7 +105,7 @@ class Func{
 		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
 		System.out.println("BBBB:nnum:"+num*2+" c:"+c);
-		if(c<=0) {
+		if(c<0) {
 			ex2=0;
 			this.num=ex2;
 			return visited[0];
@@ -116,6 +115,7 @@ class Func{
 			sb.append(b[i]);
 		}
 		ex2=Integer.parseInt(sb.toString());
+		System.out.println("now:"+ex2);
 		System.out.println("ex2:"+ex2);
 		return visited[ex2];
 	}
