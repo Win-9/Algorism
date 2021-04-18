@@ -21,10 +21,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class bj {
-	static String message;
+	static int ex;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    String message;
 	    String[]str=br.readLine().split(" ");
 	    
 	    int N=Integer.parseInt(str[0]);//N:기본값
@@ -37,84 +38,69 @@ public class bj {
 	}
 	
 	static public String bfs(int N,int T,int G) {
-		Queue<Func>queue=new LinkedList<>();
-		boolean[]visited=new boolean[100000];
+		Queue<func>queue=new LinkedList<>();
+		queue.add(new func(N,0));
+		boolean[] visited=new boolean[100000];
 		visited[N]=true;
-		queue.add(new Func(N,0));
-		Func f=null;
+		func f=null;
 		do {
 			f=queue.poll();
-			if(!f.ButtonA(f.getNum(), visited)) {
-				if(f.ex1==G) {
-					return Integer.toString(f.count+1);
-				}
-				else if(f.boom==false) {
-					return "ANG";
-				}
-				queue.add(new Func(true,f.ex1,f.getCount()+1,visited));
+			if(f.getNum()==G) {
+				return Integer.toString(f.getCount());
 			}
-			if(!f.ButtonB(f.getNum(), visited)) {
-				if(f.ex2==G) {
-					return Integer.toString(f.count+1);
-				}
-				else if(f.boom==false) {
-					return "ANG";
-				}
-				queue.add(new Func(false,f.ex2,f.getCount()+1,visited));
+			if(buttonA(visited,f)) {
+				System.out.println("AAA:"+f.num);
+				visited[f.getNum()+1]=true;
+				queue.add(new func(f.getNum()+1,f.count+1));
 			}
-		}while(f.getCount()<=T);
+			if(buttonB(visited,f)) {
+				System.out.println("BBB:"+ex);
+				visited[ex]=true;
+				queue.add(new func(ex,f.getCount()+1));
+			}
+			System.out.println("================="+f.count+"==============");
+			
+		}while(f.getCount()<T);
 		
 		return "ANG";
+		
+	}
+	
+	static public boolean buttonA(boolean[]visited,func f) {
+		if(f.getNum()+1<100000 && !visited[f.getNum()+1]) {
+			return true;
+		}
+		return false;
+	}
+	
+	static public boolean buttonB(boolean[]visited,func f) {
+		if(f.getNum()*2<100000) {
+			StringBuilder sb=new StringBuilder();
+			String []b=Integer.toString(f.getNum()*2).split("");
+			int c=Integer.parseInt(b[0])-1;
+			if(c<0) {
+				return false;
+			}
+			sb.append(Integer.toString(c));
+			for(int i=1;i<b.length;i++) {
+				sb.append(b[i]);
+			}
+			ex=Integer.parseInt(sb.toString());
+			
+			if(!visited[ex]) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
-class Func{
-	int ex1;
-	int ex2;
-	int count;
+class func{
 	int num;
-	boolean boom=true;
-	Func(int num,int count){
+	int count;
+	func(int num,int count){
 		this.num=num;
 		this.count=count;
-	}
-	Func(boolean where,int num,int count,boolean[]visited){
-		this.count=count;
-		if(num*2>99999) {
-			this.boom=false;
-			visited[num]=true;
-			return;
-		}
-		if(where) {//A button
-			this.num=num;
-			visited[ex1]=true;
-		}
-		else {
-			this.num=num;
-			visited[this.num]=true;
-		}
-	}
-	
-	public boolean ButtonA(int num,boolean[] visited) {
-		ex1=(num+1);
-		return visited[ex1];
-	}
-	
-	public boolean ButtonB(int num,boolean[] visited) {
-		StringBuilder sb=new StringBuilder();
-		String []b=Integer.toString(num*2).split("");
-		int c=Integer.parseInt(b[0])-1;
-		if(c<0) {
-			ex2=0;
-			this.num=ex2;
-			return visited[0];
-		}
-		sb.append(Integer.toString(c));
-		for(int i=1;i<b.length;i++) {
-			sb.append(b[i]);
-		}
-		ex2=Integer.parseInt(sb.toString());
-		return visited[ex2];
 	}
 	
 	public int getCount() {
