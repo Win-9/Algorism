@@ -12,7 +12,6 @@ LED가 다섯 자리까지밖에 없기 때문에 N이 99,999를 넘어가는 �
 
 
 package por;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,24 +43,26 @@ public class bj {
 		queue.add(new Func(N,0));
 		Func f=null;
 		do {
-			System.out.println("size:"+queue.size());
 			f=queue.poll();
-			System.out.println("num:"+f.getNum()+" count:"+f.getCount());
-			if(f.getNum()==G) {
-				return Integer.toString(f.count);
-			}
-			
 			if(!f.ButtonA(f.getNum(), visited)) {
-				System.out.println("exex1:"+f.ex1);
+				if(f.ex1==G) {
+					return Integer.toString(f.count+1);
+				}
+				else if(f.boom==false) {
+					return "ANG";
+				}
 				queue.add(new Func(true,f.ex1,f.getCount()+1,visited));
 			}
 			if(!f.ButtonB(f.getNum(), visited)) {
-				System.out.println("exex2:"+f.ex2);
+				if(f.ex2==G) {
+					return Integer.toString(f.count+1);
+				}
+				else if(f.boom==false) {
+					return "ANG";
+				}
 				queue.add(new Func(false,f.ex2,f.getCount()+1,visited));
 			}
-			
-			System.out.println("========"+f.count+"=======");
-		}while(f.getCount()<=T || f.boom==false);
+		}while(f.getCount()<=T);
 		
 		return "ANG";
 	}
@@ -96,7 +97,6 @@ class Func{
 	
 	public boolean ButtonA(int num,boolean[] visited) {
 		ex1=(num+1);
-		System.out.println("AAAA:ex1:"+ex1);
 		return visited[ex1];
 	}
 	
@@ -104,7 +104,6 @@ class Func{
 		StringBuilder sb=new StringBuilder();
 		String []b=Integer.toString(num*2).split("");
 		int c=Integer.parseInt(b[0])-1;
-		System.out.println("BBBB:nnum:"+num*2+" c:"+c);
 		if(c<0) {
 			ex2=0;
 			this.num=ex2;
@@ -115,8 +114,6 @@ class Func{
 			sb.append(b[i]);
 		}
 		ex2=Integer.parseInt(sb.toString());
-		System.out.println("now:"+ex2);
-		System.out.println("ex2:"+ex2);
 		return visited[ex2];
 	}
 	
