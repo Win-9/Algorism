@@ -11,7 +11,6 @@ LED가 다섯 자리까지밖에 없기 때문에 N이 99,999를 넘어가는 �
 
 
 
-package por;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,7 +19,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class bj {
+public class Main {
 	static int ex;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
@@ -49,18 +48,14 @@ public class bj {
 				return Integer.toString(f.getCount());
 			}
 			if(buttonA(visited,f)) {
-				System.out.println("AAA:"+f.num);
 				visited[f.getNum()+1]=true;
 				queue.add(new func(f.getNum()+1,f.count+1));
 			}
 			if(buttonB(visited,f)) {
-				System.out.println("BBB:"+ex);
 				visited[ex]=true;
 				queue.add(new func(ex,f.getCount()+1));
-			}
-			System.out.println("================="+f.count+"==============");
-			
-		}while(f.getCount()<T);
+			}			
+		}while(f.getCount()<T && queue.size()!=0);
 		
 		return "ANG";
 		
