@@ -26,7 +26,7 @@ public class bj {
 	}
 	static public int bfs(int N,int A, int B) {
 		Queue<Finger>queue=new LinkedList<>();
-		boolean[] visited=new boolean[1000000];
+		boolean[] visited=new boolean[1000001];
 		visited[N]=true;
 		queue.add(new Finger(N,0));
 		while(queue.size()!=0) {
@@ -56,7 +56,7 @@ public class bj {
 				}
 				break;
 			case 2:
-				if(number+1<10000 && !visited[number+1]) {
+				if(number+1<100001 && !visited[number+1]) {
 					queue.add(new Finger(number+1,count+1));
 					visited[number+1]=true;
 				}
