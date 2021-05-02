@@ -12,7 +12,8 @@ M, N과 K 그리고 K개의 직사각형의 좌표가 주어질 때, K개의 직
 입력
 첫째 줄에 M과 N, 그리고 K가 빈칸을 사이에 두고 차례로 주어진다. M, N, K는 모두 100 이하의 자연수이다. 둘째 줄부터 K개의 줄에는 한 줄에 하나씩 직사각형의 왼쪽 아래 꼭짓점의 x, y좌표값과 오른쪽 위 꼭짓점의 x, y좌표값이 빈칸을 사이에 두고 차례로 주어진다. 모눈종이의 왼쪽 아래 꼭짓점의 좌표는 (0,0)이고, 오른쪽 위 꼭짓점의 좌표는(N,M)이다. 입력되는 K개의 직사각형들이 모눈종이 전체를 채우는 경우는 없다.
 https://www.acmicpc.net/problem/2583
-br
+
+---
 # 전략
 
 기본 베이스는 좌표를 주고 탐색을 하는 문제이다. 따라서 bfs를 이용한 풀이를 할 수 있고, bfs를 이용한 풀이를 할 수 있다.
@@ -22,7 +23,7 @@ br
 
 그후 빈 네모칸에 대한 visited를 두어서 방문시 true로 체크함과 동시에 재귀를 이용하여 깊이우선 탐색을 할 수 있도록 하였다.
 
-for(int i=0;i<4;i++) {
+	for(int i=0;i<4;i++) {
 			int ex1=x+x_loc[i];
 			int ex2=y+y_loc[i];
 			
@@ -33,3 +34,13 @@ for(int i=0;i<4;i++) {
 		}
 
 bfs를 이용한다면 dfs재귀를 호출하는 대신 Queue를 만들어서 offer하는 형식을 취했을 것이다.
+
+	for(int i=0;i<4;i++) {
+			int ex1=x+x_loc[i];
+			int ex2=y+y_loc[i];
+			
+			if((ex1<=N && ex1>=0) && (ex2<=M && ex2>=0) && !visited[ex1][ex2] && map[ex1][ex2]!=1) {
+				visited[ex1][ex2]=true;
+				queue.add(new Location(ex1,ex2,map,visited,++size));
+			}
+		}
