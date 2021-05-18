@@ -44,7 +44,7 @@ public class bj {
 	static public void Change(int[][]map,boolean[][]visited) {
 		for(int i=0;i<N;i++) {
 	    	for(int j=0;j<M;j++) {
-	    		if(visited[i][j]) {
+	    		if(visited[i][j] && map[i][j]==1) {
 	    			map[i][j]=0;
 	    		}
 	    	}
