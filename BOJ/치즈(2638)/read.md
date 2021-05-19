@@ -35,3 +35,30 @@ class Location{
 (이때 탐색은 bfs를 이용하여도 상관없다. 본필자는 dfs를 연습중이므로 이 탐색을 우선한다.)
 
 이후에는 탐색을 계속 진행하여, 좌표가 모두 0이되면 그 흐른시간만큼 return 시켜준다.
+
+---
+좌표는 단지 x,y를 위함이니 따로 좌표를 위한class를 남기지 않아도 되었다.
+따라서 그 다음 좌표로가는 x,y만 표현하면 되므로 static으로 x,y좌표를 나타낸후 각 좌표가 조건에 맞는지 확인할 수 있도록 한다.
+```java
+static public boolean check(int ex1,int ex2, int [][]map,boolean[][]visited) {
+		if((ex1>=0 && ex1<N) && (ex2>=0 && ex2<M) && check_outside(ex1, ex2, map) && !visited[ex1][ex2]) {
+			return true;
+		}
+		return false;
+	}
+	static public boolean check_outside(int n,int m,int [][]map) {
+		if(map[n][m]==1) {
+			if( n==0 || m==0 || n==N-1 || m==M-1) {//가쪽이 1이면 무조건 녹음
+				return true;
+			}
+			else if(map[n-1][m]==0 || map[n][m-1]==0 || map[n][m+1]==0 || map[n+1][m]==0) {//1인것에서 십자좌표탐색
+				return true;
+			}
+		}
+		return false;
+	}
+  
+  
+```
+여기서 간과 한것이 있는데 외부와 접촉 한 부분에 대한것이다. 
+표시는 외부와 접촉한것으로 되어있지만, 결국에는 안쪽에 있으므로 썪지않는 공간을 생각해야한다.
