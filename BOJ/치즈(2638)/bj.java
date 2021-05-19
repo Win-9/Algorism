@@ -10,7 +10,7 @@ public class bj {
 	static int[] y_loc= {0,0,1,-1};
 	static int N;
 	static int M;
-	static int count=1;
+	static int count=0;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -44,11 +44,10 @@ public class bj {
 	    		}
 	    		System.out.println();
 	    	}
-	    	System.out.println("===========================");
+	    	System.out.println("==============count: "+count+"=============");
 	    	for(int i=0;i<N;i++) {
 		    	for(int j=0;j<M;j++) {
-		    		if(check_outside(i, j, map)) {
-		    			System.out.println("dfs x:"+i+" y:"+j);
+		    		if(check_outside(i, j, map) && !visited[i][j]) {
 		    			dfs(i,j,map,visited);
 		    			is_in=true;
 		    		}
@@ -64,11 +63,10 @@ public class bj {
 	
 	static public void dfs(int n,int m,int[][]map,boolean[][]visited) {
 		visited[n][m]=true;
-		System.out.println("x:"+n+" y:"+m);
 		for(int i=0;i<4;i++) {
 			int ex1=n+x_loc[i];
 			int ex2=m+y_loc[i];
-			if (check(ex1,ex2,map,visited)){//
+			if (check(ex1,ex2,map,visited)){
 				visited[ex1][ex2]=true;
 				dfs(ex1,ex2,map,visited);
 			}
@@ -91,25 +89,14 @@ public class bj {
 	}
 	static public boolean check_outside(int n,int m,int [][]map) {
 		if(map[n][m]==1) {
-			if( n==0 || m==0 || n==N-1 || m==M-1) {//양끝좌표가 1이면 무조건 녹음
+			if( n==0 || m==0 || n==N-1 || m==M-1) {//가쪽이 1이면 무조건 녹음
 				return true;
 			}
-			else if(map[n-1][m]==0 || map[n][m-1]==0 || map[n][m+1]==0 || map[n-1][m]==0) {//1인것에서 십자좌표탐색
+			else if(map[n-1][m]==0 || map[n][m-1]==0 || map[n][m+1]==0 || map[n+1][m]==0) {//1인것에서 십자좌표탐색
 				return true;
 			}
 		}
 		return false;
 	}
 	
-}
-
-class Location{
-	int x;
-	int y;
-	int count;
-	Location(int x,int y,int count){
-		this.x=x;
-		this.y=y;
-		this.count=count;
-	}
 }
