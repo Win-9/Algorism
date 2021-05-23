@@ -36,7 +36,9 @@ public class bj {
     			if((i==0||j==0||i==N-1||j==M-1) && !visited[i][j] && map[i][j]==0) {
     				dfs_for_hole(i, j, map, visited,hole_check);
     			}
+    			System.out.print(hole_check[i][j]+"\t");
     		}
+    		System.out.println();
     	}
     	visited=new boolean[N][M];
 	    /*for(int i=0;i<N;i++) {
@@ -66,11 +68,13 @@ public class bj {
 	    		break;
 	    	++count;
 	    	Change(map, visited);
+			Contect_air(hole_check,visited,map);
 	    }
 	    System.out.println("count:"+count);
 	}
 	static public void dfs_for_hole(int n,int m,int[][]map,boolean[][]visited,boolean[][]hole_check) {
 		visited[n][m]=true;
+		hole_check[n][m]=true;
 		for(int i=0;i<4;i++) {
 			int ex1=n+x_loc[i];
 			int ex2=m+y_loc[i];
@@ -91,7 +95,8 @@ public class bj {
     	}
 	}
 	static public boolean check_Change(int n,int m,int [][]map) {
-		if((map[n-1][m]==0) ||(map[n][m-1]==0)|| (map[n][m+1]==0)|| (map[n+1][m]==0)) {
+		if(n==0 || m==0 || n==N-1 || m==M-1||
+				(map[n-1][m]==0) ||(map[n][m-1]==0)|| (map[n][m+1]==0)|| (map[n+1][m]==0)) {
 			return true;
 		}
 		return false;
