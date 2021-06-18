@@ -40,3 +40,21 @@ if(visited[count_visited]==true) {
 	    		break;
           
 ```
+
+
+
+# 전략2
+
+다른사람들이 푼것을 보았는데 내가 그리디라고하면 너무 복잡하게 생각하는 경햘이 있다.
+우선 간단히 접근하여, 컵홀더를 모두 세고, N보다 크면 result=N으로 해서 바로 출력해버리면 된다....
+
+
+```
+		int answer = 0;
+		for (int i = 0; i < seats.length(); i++) {
+			answer++;
+			if(seats.charAt(i) == 'L') i++;
+		}
+		answer++;
+		System.out.println(answer > n ? n : answer);
+		```
