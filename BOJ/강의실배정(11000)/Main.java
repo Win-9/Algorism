@@ -20,18 +20,19 @@ public class Main {
 	    Arrays.sort(data, new Comparator<int[]>() {
 			@Override
 			public int compare(int[] o1, int[] o2) {
-				// TODO Auto-generated method stub
-				return o1[0]>o2[0]?1:-1;
+                if(o1[0]>o2[0]) return 1;
+                else if(o1[0]==o2[0]) return 0;
+				return -1;
 			} 
 		});
 	    result_queue.add(data[0][1]);
 	    
 	    for(int i=1;i<N;i++) {
 	    	
-	    	if(result_queue.peek()==data[i][0]) {
+	    	if(result_queue.peek()<=data[i][0]) {
 	    		result_queue.poll();
 	    	}
-	    	result_queue.add(data[1][1]);
+	    	result_queue.add(data[i][1]);
 	    }
 	    
 	    System.out.println(result_queue.size());
