@@ -1,9 +1,11 @@
+package por;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Stack;
 
-public class Main {
+public class bj {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,7 +34,7 @@ public class Main {
 	    }
 	    
 	    for(;i<str.length();i++) {
-	    	if(str.charAt(i)==stack.peek()) {
+	    	if(stack.size()!=0 && str.charAt(i)==stack.peek()) {
 	    		stack.pop();
 	    		continue;
 	    	}
