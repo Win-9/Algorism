@@ -18,31 +18,44 @@ public class bj {
 	    
 	    for(int i=0;i<N;i++) {
 		    System.out.println(Check(all_str[i]));
+		    System.out.println("==================");
 	    }
 	    
 	}
 	
 	public static int Check(String str) {
-	    Stack<Character>stack=new Stack<Character>();
-	    ArrayList<Character>list=new ArrayList<Character>();
-	    int i=0;
-	    for(;i<str.length();i++) {
-	    	if(stack.size()!=0 && str.charAt(i)==(stack.peek())) {
-	    		break;
-	    	}
-	    	stack.push(str.charAt(i));
-	    }
-	    
-	    for(;i<str.length();i++) {
-	    	if(stack.size()!=0 && str.charAt(i)==stack.peek()) {
-	    		stack.pop();
-	    		continue;
-	    	}
-	    	list.add(str.charAt(i));
-	    }
-	    
-	    return list.size()==0 && stack.size()==0 ? 0: (list.size()==1 && stack.size()==0 ) || (list.size()==0 && stack.size()==1 )?1:2;
-	    
+		
+		int right=str.length()-1;
+		int left=0;
+		int sum=0;
+		
+		while(left+1!=right) {
+			if(sum>=2) return 2;
+			
+			
+			if(str.charAt(left)==str.charAt(right)) {
+				left++;
+				right--;
+				continue;
+			}
+			else {
+				sum++;
+				if(str.charAt(left+1)==str.charAt(right)) {
+					left+=2;
+					right--;
+					continue;
+				}
+				else if(str.charAt(left)==str.charAt(right-1)){
+					left++;
+					right-=2;
+					continue;
+				}
+				return 2;
+			}
+			
+		}
+		
+		return sum;
 	    
 	}
 	
