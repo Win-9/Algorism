@@ -29,31 +29,45 @@ public class bj {
 		int left=0;
 		int sum=0;
 		
-		while(left+1!=right) {
+		while(left!=right || left+1!=right) {
+			if(left==right || left+1==right) break;
+			switch(str.length()/2) {
+				case 0:
+					if(str.charAt(left)==str.charAt(right)) {
+						left++;
+						right--;
+					}
+					else {
+						return 2;
+					}
+					break;
+					
+				case 1:
+					if(str.charAt(left)==str.charAt(right)) {
+						System.out.println("left:"+left);
+						System.out.println("right:"+right);
+						left++;
+						right--;
+					}
+					else if(str.charAt(left+1)==str.charAt(right)){
+						left+=2;
+						right--;
+						sum++;
+					}
+					else if(str.charAt(left)==str.charAt(right+1)) {
+						right-=2;
+						left++;
+						sum++;
+					}
+					else return 2;
+					
+					break;
+					
+			}
 			if(sum>=2) return 2;
 			
-			
-			if(str.charAt(left)==str.charAt(right)) {
-				left++;
-				right--;
-				continue;
-			}
-			else {
-				sum++;
-				if(str.charAt(left+1)==str.charAt(right)) {
-					left+=2;
-					right--;
-					continue;
-				}
-				else if(str.charAt(left)==str.charAt(right-1)){
-					left++;
-					right-=2;
-					continue;
-				}
-				return 2;
-			}
-			
 		}
+		if(str.length()/2!=0)	sum++;
 		
 		return sum;
 	    
