@@ -42,3 +42,6 @@ https://www.acmicpc.net/problem/1874
 ```
 if 를 이용해 각 조건마다 StringBuilder에 어떤 문자열을 저장 할 것인지 정하고, 아예 불가능할 수열이라고 판단하면 check에 true를 주게됨으로서 
 for을 돌때마다 continue를 하게되어 NO를 출력하게 하였다.
+
+---
++ 굳이 Stack자체를 이용하기보다는 array에 index만 있어도 가능하다.
