@@ -41,3 +41,41 @@ while(idx!=(N-1)) {
 
 ---
 시간초과 오류가 난다. 아마 O(logN)까지 줄여야 할듯하다.
+
+
+거꾸로 비교해서 넣어보기로 하였다.
+```java
+package por;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.Stack;
+import java.util.ArrayList;
+
+public class bj {
+	public static void main(String[] args) throws Exception {
+		// TODO Auto-generated method stub
+	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	    StringBuilder sb=new StringBuilder();
+	    int N=Integer.parseInt(br.readLine());
+	    String[]str=br.readLine().split(" ");
+	    int top=N-2;
+	    int middle=Integer.parseInt(str[N-1]);
+	    sb.append("-1");
+	    while(top!=-1) {
+	    	if(middle>Integer.parseInt(str[top--])) {
+	    		sb.insert(0, middle+"\n");
+	    	}
+	    	else {
+	    		middle=Integer.parseInt(str[top+1]);
+	    		sb.insert(0, -1+"\n");
+	    	}
+	    }
+	    
+	    System.out.println(sb);
+
+		
+	}
+	
+}
+```
