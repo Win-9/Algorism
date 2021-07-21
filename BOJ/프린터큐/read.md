@@ -13,3 +13,19 @@ https://www.acmicpc.net/problem/1966
 
 
 # 전략
+
+Queue data structure를 이용하여 풀이을 하였다.
+queue에서 가장 큰값을 max로 두고 queue를 peek()을 한다.
+이때 max와 비교를 해서 값이 더 작으면 queue뒤에 다시 offer를 하고 아니면 poll()한후 max값을 바꾼다.
+```java
+if(queue.peek()==max) {
+				count++;
+				System.out.println("poll:"+queue.poll()+"===================");
+				max=Collections.max(queue);
+				System.out.println("changed max:"+max);
+				continue;
+			}
+```
+---
+중복되는 값이 나와버리면 구별을 못해서 원하는 값이 나오지 않는다...
+다시생각 해보자.
