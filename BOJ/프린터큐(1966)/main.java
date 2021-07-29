@@ -1,3 +1,5 @@
+package por;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -6,7 +8,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.Stream;
 
-public class Main {
+public class  {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,7 +20,6 @@ public class Main {
 	    	int N=Integer.parseInt(str[0]);
 	    	int M=Integer.parseInt(str[1]);
 	    	sb.append(Check(N,M,br.readLine().split(" "))+"\n");
-	    	
 	    }
 	    System.out.println(sb);
 		
@@ -29,19 +30,19 @@ public class Main {
 		for(int k=0;k<str.length;k++) {
 			queue.add(new Node(k,Integer.parseInt(str[k])));
 		}
-
 		
 		int max=queue.stream().mapToInt(s-> s.getImportance()).max().getAsInt();
 		int count=1;
-		while(!(queue.peek().index==M && queue.peek().importance>=max)) {
+		while(!(queue.peek().getIndex()==M && queue.peek().getImportance()>=max)) {
 			if(queue.peek().importance==max) {
 				count++;
 				max=queue.stream().mapToInt(s-> s.getImportance()).max().getAsInt();
 				continue;
 			}
-			
 			queue.add(queue.poll());
 		}
+		queue=null;
+		
 		
 		return count;
 		
