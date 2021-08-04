@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class bj {
@@ -17,31 +17,48 @@ public class bj {
 	    Deque<Integer>queue=new LinkedList<>();
 	    int N=Integer.parseInt(str[0]);
 	    int M=Integer.parseInt(str[1]);
-	    
-	    ArrayList<Integer>list=new ArrayList(Arrays.asList(Stream.of(br.readLine().split(" "))
+	    int[]arr=Stream.of(br.readLine().split(" "))
 	    		.mapToInt(s->Integer.parseInt(s))
-	    		.toArray()));
+	    		.toArray();
+
+	    int idx=0;
+
 	    int count=0;//2,9,5
     	for(int i=N;i>0;i--) {
     		queue.add(i);
     	}
+    	print(queue);
  
-    	while(list.size()!=0) {
-    		if(list.get(0)==queue.peekLast()) {
+    	while(idx!=arr.length) {
+    		if(arr[idx]==queue.peekLast()) {
     			queue.pollLast();
-    			list.remove(0);
+    			++idx;
+    			print(queue);
+    			continue;
     		}
-    		if(list.get(0)<queue.size()/2) {
+
+    		if(arr[idx]<queue.size()/2) {
     			queue.addFirst((queue.pollLast()));
     			count++;
+    			print(queue);
+
     		}
-    		else if(list.get(0)>=queue.size()/2) {
+    		else if(arr[idx]>=queue.size()/2) {
     			queue.addLast((queue.pollFirst()));
     			count++;
+    			print(queue);
+
     		}
     	}
     	
     	System.out.println(count);
+	}
+	
+	public static void print(Deque<Integer>queue) {
+		for(int i:queue) {
+			System.out.print(i+" ");
+		}
+		System.out.println();
 	}
 
 	
