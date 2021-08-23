@@ -20,7 +20,19 @@ D는 단순히 앞문자를 제거해주고, 빈문자열일때는 error를 출�
 
 
 
-
+```java
+switch(str.charAt(i)) {
+			case 'R':
+				sb.reverse();
+				break;
+			case 'D':
+				if((sb.toString()).equals("")) {
+					break Loop1;
+				}
+				sb.delete(0,1);
+				break;
+			}
+ ```
 
 
 
