@@ -1,3 +1,5 @@
+package por;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -8,60 +10,64 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 
-public class Main {
-	static int count=0;
-
+public class bj {
+	static StringBuilder result=new StringBuilder();
+	static StringBuilder ex=new StringBuilder();
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    int T=Integer.parseInt(br.readLine());
-
+	    Deque<String>queue=new LinkedList<>();
 	    for(int i=0;i<T;i++) {
 		    StringBuilder sb=new StringBuilder();
-		    String str=br.readLine();
+		    StringBuilder str=new StringBuilder(br.readLine());
 		    int N=Integer.parseInt(br.readLine());
-		    String temp = br.readLine().replace("[", "").replace("]", "").replace(",", " ");
-			StringTokenizer st = new StringTokenizer(temp);
+		    String []temp = br.readLine().replace("[", "").replace("]", "").split(",");
 		    
-		    while(st.hasMoreTokens()) {
-		    	sb.append(st.nextToken());
-		    }
-		    		    
-		    func1(sb,str);
-		    print(sb);
-	    }	
-	    
+		    Stream.of(temp).forEach(s->queue.add(s.toString()));
+		    func1(queue,str);
+		    print(queue);
+	    }
 	}
 	
-	public static void func1(StringBuilder sb,String str) {
+	public static void func1(Deque<String>queue,StringBuilder str) {
+		boolean reverse=false;
 		Loop1:
 		for(int i=0;i<str.length();i++) {
 			switch(str.charAt(i)) {
 			case 'R':
-				sb.reverse();
+				reverse=(!reverse);
 				break;
 			case 'D':
-				if((sb.toString()).equals("")) {
+				if(queue.size()==0) {
 					break Loop1;
 				}
-				sb.delete(0,1);
+				
+				if(reverse==true) {
+					queue.removeLast();
+				}
+				else {
+					queue.remove();
+				}
 				break;
 			}
 		}
 	}
 	
-	public static void print(StringBuilder sb) {
-		if((sb.toString()).equals("")) {
-			System.out.println("error");
+	public static void print(Deque<String>queue) {
+		if(queue.size()==0) {
+			result.append("error\n");
 		}
 		else {
-			int i=0;
-			System.out.print("[");
-			for(;i<sb.length()-1;i++) {
-				System.out.print(sb.charAt(i)+",");
+			result.append("[");
+			for(int i=0;i<queue.size()-1;i++) {
+				ex.append(queue.remove()+",");
 			}
-			System.out.print(sb.charAt(i)+"]");
+			result.append("]\n");
 		}
+		
+		System.out.println(result);
+		result=new StringBuilder();
 	}
 	
 }
