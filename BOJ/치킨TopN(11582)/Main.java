@@ -5,68 +5,65 @@ import java.io.InputStreamReader;
 import java.util.stream.Stream;
 
 public class bj {
-	static int number=0;
-	static int []sorted;
+	static int people;
+	static int N;
+	static String []sorted;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	    int N=Integer.parseInt(br.readLine());
+	    N=Integer.parseInt(br.readLine());
 	    String[]str=br.readLine().split(" ");
-	    int[]number=Stream.of(str).mapToInt(s->Integer.parseInt(s)).toArray();
-	    int people=Integer.parseInt(br.readLine());
-	    sorted=new int[str.length];
+	    people=Integer.parseInt(br.readLine());
+	    sorted=new String[str.length];
 	    
-	    mergeSort(number,0,N,people);
+	    mergeSort(str,0,N-1);
 	    
 	    for(int i=0;i<N;i++) {
-	    	System.out.print(number[i]+" ");
+	    	System.out.print(str[i]+" ");
 	    }
-	}
+	}//1 5 2 4 2 9 7 3
 	
-	public static void merge(int[]arr,int low,int middle,int high) {
+	public static void merge(String[]arr,int low,int middle,int high) {
+		
+		if(high-low>N/people)
+			return;
+		
 		int i=low;
-		int j=middle;
+		int j=middle+1;
 		
 		int k=low;
 		
 		while(i<=middle && j<=high) {
-			if(arr[i]<arr[j]) {
-				sorted[k]=arr[i];
-				i++;
-			}
-			else {
-				sorted[k]=arr[j];
-				j++;
-			}
-			k++;
+			System.out.println("arr[i]:"+arr[i]+" arr[j]:"+arr[j]);
+			if(arr[i].compareTo(arr[j])<0) 
+				sorted[k++]=arr[i++];
+			else 
+				sorted[k++]=arr[j++];
+			
+			System.out.println("====================");
 		}
 		
-		if(i>middle) {
-			for(int t=j;t<=high;t++) {
-				sorted[k]=arr[t];
-				k++;
-			}
+		while(i<=middle) {
+			sorted[k++]=arr[i++];
 		}
-		else {
-			for(int t=i;t<=middle;t++) {
-				sorted[k]=arr[t];
-				k++;
-			}
+		while(j<=high) {
+			sorted[k++]=arr[j++];
 		}
-		
+
 		for(int t=0;t<=high;t++) {
 			arr[t]=sorted[t];
 		}
 		
 	}
 	
-	public static void mergeSort(int[]arr,int n,int m,int people) {
+	public static void mergeSort(String[]arr,int n,int m) {		
+		if(n==m)
+			return;
+		
 		int middle=(n+m)/2;
-		if(n<m && people!=middle) {
-			mergeSort(arr,n,middle,people);
-			mergeSort(arr,middle+1,m,people);
-			merge(arr,n,middle,m);
-		}
+		mergeSort(arr,n,middle);
+		mergeSort(arr,middle+1,m);
+		merge(arr,n,middle,m);
 	}
 	
 }
