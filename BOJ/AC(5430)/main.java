@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Deque;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -25,6 +26,7 @@ public class bj {
 		    String []temp = br.readLine().replace("[", "").replace("]", "").split(",");
 		    
 		    Stream.of(temp).forEach(s->queue.add(s.toString()));
+
 		    func1(queue,str);
 		    print(queue);
 	    }
@@ -47,7 +49,7 @@ public class bj {
 					queue.removeLast();
 				}
 				else {
-					queue.remove();
+					queue.removeFirst();
 				}
 				break;
 			}
@@ -56,18 +58,22 @@ public class bj {
 	
 	public static void print(Deque<String>queue) {
 		if(queue.size()==0) {
-			result.append("error\n");
+			ex.append("error\n");
 		}
 		else {
-			result.append("[");
-			for(int i=0;i<queue.size()-1;i++) {
-				ex.append(queue.remove()+",");
+			ex.append("[");
+			Iterator<String>iterator=queue.iterator();
+			
+			while(iterator.hasNext()) {
+				String iter=iterator.next();
+				ex.append(iter+",");
 			}
-			result.append("]\n");
+			ex.delete(ex.length()-1, ex.length());
+			ex.append("]\n");
 		}
 		
-		System.out.println(result);
-		result=new StringBuilder();
+		System.out.println(ex);
+		ex.setLength(0);
 	}
 	
 }
