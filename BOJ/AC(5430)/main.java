@@ -71,23 +71,23 @@ public class Main {
 				result.append("[");
 				while(queue.size()>=1) {
 					if(queue.size()==1) {
-						result.append(queue.removeLast()+"\n");
+						result.append(queue.removeLast());
 						break;
 					}
 					result.append(queue.removeLast()+",");
 				}
-				result.append("]");
+				result.append("]\n");
 			}
 			else {
 				result.append("[");
 				while(queue.size()>=1) {
 					if(queue.size()==1) {
-						result.append(queue.removeFirst()+"\n");
+						result.append(queue.removeFirst());
 						break;
 					}
 					result.append(queue.removeFirst()+",");
 				}
-				result.append("]");
+				result.append("]\n");
 			}
 		}
 		reverse=false;
