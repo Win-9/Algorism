@@ -23,16 +23,76 @@ D는 단순히 앞문자를 제거해주고, 빈문자열일때는 error를 출�
 ```java
 switch(str.charAt(i)) {
 			case 'R':
-				sb.reverse();
+				reverse=(!reverse);
 				break;
 			case 'D':
-				if((sb.toString()).equals("")) {
+				if(queue.size()==0) {
+					check=false;
 					break Loop1;
 				}
-				sb.delete(0,1);
+				
+				if(reverse==true) {
+					queue.removeLast();
+				}
+				else {
+					queue.removeFirst();
+				}
 				break;
 			}
  ```
+
+
+---
+
+계속 예외가 생겨서 오래걸렸다.
+또한 R이 하나로 끝나게되면 계속 해서 역으로 출력을 해야하므로 reverse를 부어서 false를 두어서 R의 마지막을
+구별할 수 있게한다.
+
+
+```java
+if(reverse==true) {
+				result.append("[");
+				while(queue.size()>=1) {
+					if(queue.size()==1) {
+						result.append(queue.removeLast());
+						break;
+					}
+					result.append(queue.removeLast()+",");
+				}
+				result.append("]\n");
+			}
+			else {
+				result.append("[");
+				while(queue.size()>=1) {
+					if(queue.size()==1) {
+						result.append(queue.removeFirst());
+						break;
+					}
+					result.append(queue.removeFirst()+",");
+				}
+				result.append("]\n");
+			}
+```
+
+
+또한 이 func1에 들어오기전에 N이 0이고, 처음 이 D함수일때는 error를 출력해야하므로
+따로 result에 append해주고 바로 continue해준다.
+
+```java
+if(N==0 && str.charAt(0)=='D') {
+		    	result.append("error\n");
+		    	continue;
+		    }
+```
+
+
+
+
+
+
+
+
+
 
 
 
