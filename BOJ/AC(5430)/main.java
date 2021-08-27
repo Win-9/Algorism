@@ -1,5 +1,3 @@
-package por;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Stream;
 
-public class bj {
+public class Main {
 	static boolean check=true;
 	static boolean reverse=false;
 	static StringBuilder result=new StringBuilder();
@@ -24,7 +22,13 @@ public class bj {
 		    Deque<String>queue=new LinkedList<>();
 		    StringBuilder str=new StringBuilder(br.readLine());
 		    int N=Integer.parseInt(br.readLine());
+		
 		    String []temp = br.readLine().replace("[", "").replace("]", "").split(",");
+		    
+		    if(N==0 && str.charAt(0)=='D') {
+		    	result.append("error\n");
+		    	continue;
+		    }
 		    
 		    Stream.of(temp).forEach(s->queue.add(s.toString()));
 		    
@@ -59,24 +63,33 @@ public class bj {
 	}
 	
 	public static void print(Deque<String>queue) {
-		if(check=false) {
-			ex.append("error\n");
+		if(check==false) {
+			result.append("error\n");
 		}
 		else {
-			ex.append("[");
-			Iterator<String>iterator=queue.iterator();
-			
-			while(iterator.hasNext()) {
-				String iter=iterator.next();
-				ex.append(iter+",");
+			if(reverse==true) {
+				result.append("[");
+				while(queue.size()>=1) {
+					if(queue.size()==1) {
+						result.append(queue.removeLast()+"\n");
+						break;
+					}
+					result.append(queue.removeLast()+",");
+				}
+				result.append("]");
 			}
-			ex.delete(ex.length()-1, ex.length());
-			ex.append("]\n");
+			else {
+				result.append("[");
+				while(queue.size()>=1) {
+					if(queue.size()==1) {
+						result.append(queue.removeFirst()+"\n");
+						break;
+					}
+					result.append(queue.removeFirst()+",");
+				}
+				result.append("]");
+			}
 		}
-		
-		
-		result.append(ex);
-		ex.setLength(0);
 		reverse=false;
 		check=true;
 	}
