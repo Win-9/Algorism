@@ -30,6 +30,7 @@ dfs로 접근하니 N을 쪼개고 반복해서 해야하니 반복문을 수없
 따라서 문제 흐름을 다시 파악한후 분할정복을 떠올려서 다시 접근했다.
 
 우선 푼 방식을 그림으로 그려보자면
+![SmartSelect_20210901-211409_Noteshelf](https://user-images.githubusercontent.com/80390524/131669418-478911ee-1bfb-45b8-aa3d-5ea9b2dc6e92.jpg)
 
 
 각 x,y의 범위를 나누어 다시 반복적으로 작업을 수행하도록 하였다.
