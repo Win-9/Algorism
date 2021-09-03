@@ -20,9 +20,9 @@ public class bj {
 	    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	    int N=Integer.parseInt(br.readLine());
 	    map=new int[N][N];
-	    for(int i=0;i<8;i++) {
+	    for(int i=0;i<N;i++) {
 	    	String[]str=br.readLine().split(" ");
-	    	for(int j=0;j<8;j++) {
+	    	for(int j=0;j<N;j++) {
 	    		map[i][j]=Integer.parseInt(str[j]);
 	    	}
 	    }
