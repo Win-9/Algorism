@@ -15,3 +15,36 @@
 좌표 class를 따로 두어서 mergerSort를 구현한다.
 이때 ArrayList나 Array를 써서 Collection.sort를 이용하여 Comparator를 구현하면 간단히 정렬 되지만,
 직접 구현하고자 사용하지 않고 문제를 푼다.
+
+```java
+class Location {
+	int x;
+	int y;
+
+	public Location(int x, int y) {
+		// TODO Auto-generated constructor stub
+		this.x = x;
+		this.y = y;
+	}
+}
+```
+좌표를 나타내는 class
+
+```java
+static boolean compare(Location loc1, Location loc2) {
+		if (loc1.x < loc2.x) {
+			return true;
+		}
+
+		if (loc1.x == loc2.x) {
+			if (loc1.y < loc2.y) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+```
+문제에서 제시한 대로 x좌표의 비교와 y좌표의 비교순으로 정렬을 하도록 한다.
+
+이후 mergeSort에서 compare메소드를 기준으로 병합을 하도록 한다.
