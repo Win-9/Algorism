@@ -4,6 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.StringTokenizer;
 
 public class Main {
 	static Location[] buff;
@@ -16,17 +17,18 @@ public class Main {
 		Location[] loc = new Location[N];
 
 		for (int i = 0; i < N; i++) {
-			String[] str = br.readLine().split(" ");
-			loc[i] = new Location(Integer.parseInt(str[0]), 
-					Integer.parseInt(str[1]));
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			loc[i] = new Location(Integer.parseInt(st.nextToken()), 
+					Integer.parseInt(st.nextToken()));
 		}
 		
 
 		merge(loc, N);
 
 		for (int i = 0; i < N; i++) {
-			System.out.println(loc[i].x+" "+loc[i].y);
+			sb.append(loc[i].x+" "+loc[i].y+'\n');
 		}
+		System.out.println(sb);
 	}
 
 	static void merge(Location[] loc, int N) {
