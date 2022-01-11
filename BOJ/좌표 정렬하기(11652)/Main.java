@@ -1,5 +1,3 @@
-package por;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -7,7 +5,7 @@ import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class bj {
+public class Main {
 	static Location[] buff;
 
 	public static void main(String[] args) throws Exception {
@@ -19,8 +17,10 @@ public class bj {
 
 		for (int i = 0; i < N; i++) {
 			String[] str = br.readLine().split(" ");
-			loc[i] = new Location(Integer.parseInt(str[0]), Integer.parseInt(str[0]));
+			loc[i] = new Location(Integer.parseInt(str[0]), 
+					Integer.parseInt(str[1]));
 		}
+		
 
 		merge(loc, N);
 
@@ -33,6 +33,7 @@ public class bj {
 		buff = new Location[N];
 
 		merge_sort(loc, 0, N - 1);
+		buff = null;
 	}
 
 	static void merge_sort(Location[] loc, int left, int right) {
@@ -40,22 +41,22 @@ public class bj {
 			int p = 0;
 			int j = 0;
 			int i;
-			int k = 0;
+			int k = left;
 			int center = (left + right) / 2;
 
 			merge_sort(loc, left, center);
 			merge_sort(loc, center + 1, right);
 
-			for (i = left; i < center; i++) {
+			for (i = left; i <= center; i++) {
 				buff[p++] = loc[i];
 			}
 
-			while (j < p) {
+			while (i <= right && j < p) {
 				loc[k++] = compare(buff[j], loc[i]) ? buff[j++] : loc[i++];
 			}
 
 			while (j < p) {
-				loc[k++] = buff[i];
+				loc[k++] = buff[j++];
 			}
 
 		}
