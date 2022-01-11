@@ -48,3 +48,5 @@ static boolean compare(Location loc1, Location loc2) {
 문제에서 제시한 대로 x좌표의 비교와 y좌표의 비교순으로 정렬을 하도록 한다.
 
 이후 mergeSort에서 compare메소드를 기준으로 병합을 하도록 한다.
+
++ SringTokenize와 StringBuilder를 자주 이용하자. 일반 적으로 split하고 sout하는것보다 속도가 훨씬훨씬 더 빠르다.
