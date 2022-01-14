@@ -30,3 +30,15 @@
 
 또한 서류 점수에 따라서 정렬을 할 수 있도록
 시간을 보장한는 mergeSort를 사용하여 정렬을 하고, 면접점수의 비교를 통해 정답을 산출하였다.
+
+---
+다른 생각을 해본결과 정렬과정을 제외하고 풀이하는게 가능했다.
+중복 순위가 없으니 array의 index를 서류점수라고 생각하면 자동으로 정렬이 되는게 가능했다.
+```java
+for (int j = 0; j < M; j++) {
+				StringTokenizer st = new StringTokenizer(br.readLine());
+				score[Integer.parseInt(st.nextToken())]
+						= Integer.parseInt(st.nextToken());
+			}
+ ```
+ 정렬과정을 제외하니 실행시간이 줄어든 것을 확인할 수 있었다.
