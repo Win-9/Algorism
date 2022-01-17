@@ -9,4 +9,24 @@
 
 # 풀이
 전에 풀었던 문제와 비슷한 문제이다.
+### (베스트셀러)https://github.com/Win-9/Algorism/tree/main/BOJ/%EB%B2%A0%EC%8A%A4%ED%8A%B8%EC%85%80%EB%9F%AC(1302)
+이 문제와 거의 동일한 알고리즘을 사용하였다.
+HashTable을 이용하여 나온 문자와 그 횟수를 담아두었다.
+후에, 숫자를 비교할때는 우선 String으로 비교를 하려고 했는데 compareTo()메소드가 음수까지 String으로 비교하는것은
+불가능 하였다. 따라서 타입을 Long으로 변경을하고, 정수를 비교하는 방법을 택했다.
 
+```java
+for (String s : map.keySet()) {
+
+			if (map.get(s) == max && Long.parseLong(s) 
+					< Long.parseLong(answer)) {
+				answer = s;
+				continue;
+			}
+
+			if (map.get(s) > max) {
+				max = map.get(s);
+				answer = s;
+			}
+		}
+```
