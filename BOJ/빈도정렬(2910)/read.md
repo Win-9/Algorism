@@ -33,7 +33,8 @@ ArrayList<Integer> list = new ArrayList<>(map.keySet());
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				// TODO Auto-generated method stub
-				return o1 < o2 ? -1 : o1 == o2 ? 0 : 1;
+				return Integer.compare(map.get(o2), map.get(o1));
+
 			}
 		});
 
@@ -43,4 +44,4 @@ ArrayList<Integer> list = new ArrayList<>(map.keySet());
 			}
 		}
  ```
- 예제는 다 맞는데 왜인지모르게 채점을 하면 틀린다.
+정렬식을 변경하여서 해결하였다.
