@@ -35,7 +35,7 @@ public class Main {
 			@Override
 			public int compare(Integer o1, Integer o2) {
 				// TODO Auto-generated method stub
-				return o1 < o2 ? -1 : o1 == o2 ? 0 : 1;
+				return Integer.compare(map.get(o2), map.get(o1));
 			}
 		});
 
