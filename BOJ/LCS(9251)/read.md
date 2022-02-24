@@ -12,7 +12,7 @@ LCS(Longest Common Subsequence, 최장 공통 부분 수열)문제는 두 수열
 # 풀이
 도저히 어떻게 푸는지 몰르겠어서 여러 참고를했다.  
 
-##[LCS알고리즘](https://velog.io/@emplam27/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-LCS-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Longest-Common-Substring%EC%99%80-Longest-Common-Subsequence)
+## [LCS알고리즘](https://velog.io/@emplam27/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-LCS-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Longest-Common-Substring%EC%99%80-Longest-Common-Subsequence)
 
 
 푸는방식에 대해서는 이해를 했지만, 왜 이렇게 푸는지에대해서는 아직 이해를 못한상태...
