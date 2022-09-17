@@ -39,7 +39,7 @@
 정리해보면 이는 꺾이는 부분 다시말해 서브트리에 관한 내용이 아니라 트리의 깊이에 따라서 제곱을 해주면 된다.   
 
 ```java
-for(int j = 0; j < str.length; j++) {
+			for(int j = 0; j < str.length; j++) {
 				if (str[j].equals("[")) {
 					size++;
 					depth = Math.max(depth, size);
