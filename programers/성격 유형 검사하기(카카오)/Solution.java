@@ -16,10 +16,10 @@ class Solution {
             
             if (scoreIndex < 3) {
                 surveyMap.put(left, 
-                              surveyMap.getOrDefault(surveyMap.get(left), 0) + score[scoreIndex]);
+                              surveyMap.getOrDefault(left, 0) + score[scoreIndex]);
             } else if (scoreIndex > 3) {
              surveyMap.put(right, 
-                              surveyMap.getOrDefault(surveyMap.get(right), 0) + score[scoreIndex]);   
+                              surveyMap.getOrDefault(right, 0) + score[scoreIndex]);   
             }
         }
         
@@ -46,7 +46,7 @@ class Solution {
             return;
         }
         
-        if (left.compareTo(right) < 0) {
+        if (left.compareTo(right) <= 0) {
             answer.append(left);
         } else {
             answer.append(right);            
