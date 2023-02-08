@@ -60,7 +60,8 @@ choices의 길이 = survey의 길이
 choices[i]는 검사자가 선택한 i+1번째 질문의 선택지를 의미합니다.   
 1 ≤ choices의 원소 ≤ 7   
 
-choices	뜻   
+|choices|	뜻|
+|-|-|
 |1|	매우 비동의|
 |2|	비동의|
 |3|	약간 비동의|
