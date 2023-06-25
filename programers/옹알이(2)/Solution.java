@@ -1,14 +1,10 @@
-package com.backend.nutt.common;
+import java.util.*;
+import java.lang.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-public class ex {
+class Solution {
     static String[] words = {"aya", "ye", "woo", "ma"};
     static String[] duplicatedWords = {"ayaaya", "yeye", "woowoo", "mama"};
-    public static void main(String[] args) {
-        String[] babbling = {"yayae"};
+    public int solution(String[] babbling) {
         int answer = 0;
         for(int i = 0; i < babbling.length; i++) {
             StringBuilder str = new StringBuilder(babbling[i]);
@@ -16,41 +12,40 @@ public class ex {
                 continue;
             }
 
-            System.out.println("pass:" + str);
-
             if (check(str)) {
                 answer++;
             }
-
+            
         }
-        System.out.println("answer = " + answer);
+        return answer;
     }
-
+    
     static boolean check(StringBuilder str) {
         for(int i = 0; i < 4; i++) {
             int index = str.indexOf(words[i]);
             if (index == -1) {
                 continue;
             }
-            System.out.println("delte:" + str);
-
-            str.delete(index, index + words[i].length());
+            str.replace(index, index + words[i].length(), ".");
+            i--;
         }
-
-        if (str.length() > 0) {
-            return false;
+        
+        for(int i = 0; i < str.length(); i++) {
+            if (!str.substring(i, i + 1).equals(".")) {
+                return false;
+            }
         }
-
+        
         return true;
     }
-
+    
     static boolean duplicatedCheck(StringBuilder str) {
         for(int i = 0; i < 4; i++) {
             if ((str.toString()).contains(duplicatedWords[i])) {
                 return true;
             }
         }
-
+        
         return false;
     }
 }
