@@ -7,11 +7,16 @@ class Solution
     public int solution(int []A, int []B)
     {
         int answer = 0;
-        Integer[] bArray = Arrays.stream(B).boxed().toArray(Integer[]::new);
-        Arrays.sort(A);
-        Arrays.sort(bArray,Collections.reverseOrder());
+        PriorityQueue<Integer> aQueue = new PriorityQueue<>();
+        PriorityQueue<Integer> bQueue = new PriorityQueue<>(Collections.reverseOrder());
+
         for(int i = 0; i < A.length; i++) {
-            answer += A[i] * bArray[i]; 
+            aQueue.add(A[i]);
+            bQueue.add(B[i]);
+        }
+        
+        for(int i = 0; i < A.length; i++) {
+            answer += aQueue.poll() * bQueue.poll();
         }
 
         return answer;
