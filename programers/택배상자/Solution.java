@@ -1,13 +1,8 @@
-package com.backend.nutt.common;
+import java.lang.*;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-
-public class ex {
-    public static void main(String[] args) {
-        int[] order = {4, 3, 1, 2, 5};
+class Solution {
+    public int solution(int[] order) {
         int answer = 0;
         int box = 1;
         Stack<Integer> stack = new Stack<>();
@@ -19,12 +14,18 @@ public class ex {
             }
 
 
-            if (!stack.isEmpty() && order[i] == stack.peek()) {
-                stack.pop();
-                answer++;
-                continue;
+            if (!stack.isEmpty()) {
+                if (stack.peek() > order[i]) {
+                    break;
+                }
+
+                if (order[i] == stack.peek()) {
+                    stack.pop();
+                    answer++;
+                    continue;
+                }
             }
-            
+
 
             for(; box <= order.length; box++) {
                 if (box == order[i]) {
@@ -36,6 +37,7 @@ public class ex {
             }
 
         }
-
+        
+        return answer;
     }
 }
