@@ -2,89 +2,49 @@ import java.util.*;
 import java.lang.*;
 
 class Solution {
-    static int subNum;
     static int[][] map;
-    static int min = 100000;
     public int[] solution(int rows, int columns, int[][] queries) {
         int[] answer = new int[queries.length];
-        int j = 0;
+        int minimalsIdx=0;
         map = new int[rows][columns];
         init(rows, columns);
         
-        for(int i = 0; i < queries.length; i++) {
-            int x1 = queries[i][0] - 1;
-            int y1 = queries[i][1] - 1;
-            int x2 = queries[i][2] - 1;
-            int y2 = queries[i][3] - 1;
-            slideTop(rows, columns, x1, y1, x2, y2);
-            slideRight(rows, columns, x1, y1, x2, y2);
-            slideBottom(rows, columns, x1, y1, x2, y2);
-            slideLeft(rows, columns, x1, y1, x2, y2);
-            answer[j++] = subNum;
-            subNum = 100000;
+        for(int k = 0; k < queries.length; k++) {
+            int x1 = queries[k][0] - 1;
+            int y1 = queries[k][1] - 1;
+            int x2 = queries[k][2] - 1;
+            int y2 = queries[k][3] - 1;
+            int firstNum = map[x1][y2];
+            int min = firstNum;
+            for(int i = y2-1; i >= y1; i--){
+                min = Math.min(min, map[x1][i]);
+                map[x1][i + 1] = map[x1][i];
+            }
+
+            // 숫자를 위로 이동 (좌측)
+            for(int i = x1+1; i <= x2; i++){
+                min = Math.min(min, map[i][y1]);
+                map[i - 1][y1] = map[i][y1];
+            }
+
+            // 숫자를 좌로 이동 (하단)
+            for(int i = y1+1; i <= y2; i++){
+                min = Math.min(min, map[x2][i]);
+                map[x2][i - 1] = map[x2][i];
+            }
+
+            // 숫자를 아래로 이동 (우측)
+            for(int i = x2-1; i >= x1; i--){
+                min = Math.min(min, map[i][y2]);
+                map[i + 1][y2] = map[i][y2];
+            }
+
+            map[x1 + 1][y2] = firstNum;
+            answer[minimalsIdx] = min;
+            minimalsIdx++;
         }
-        
+
         return answer;
-    }
-    
-    static void slideTop(int rows, int col, int x1, int y1, int x2, int y2) {
-        subNum = map[x1][y2];
-        for(int i = y2; i > y1; i--) {
-            map[x1][i] = map[x1][i - 1];
-            if (map[x1][i] < min) {
-                min = map[x1][i];
-            }
-        }
-
-        if (subNum < min) {
-            min = subNum;
-        }
-    }
-
-    static void slideRight(int rows, int col, int x1, int y1, int x2, int y2) {
-        int sub = map[x2][y2];
-        for(int i = x2; i > x1; i--) {
-            map[i][y2] = map[i - 1][y2];
-            if (map[i][y2] < min) {
-                min = map[x1][i];
-            }
-        }
-
-        map[x1 + 1][y2] = subNum;
-        subNum = sub;
-        if (subNum < min) {
-            min = subNum;
-        }
-    }
-
-    static void slideBottom(int rows, int col, int x1, int y1, int x2, int y2) {
-        int sub = map[x2][y1];
-        for(int i = y1; i < y2; i++) {
-            map[x2][i] = map[x2][i +  1];
-            if (map[x2][i] < min) {
-                min = map[x1][i];
-            }
-        }
-
-        map[x2][y2 - 1] = subNum;
-        subNum = sub;
-        if (subNum < min) {
-            min = subNum;
-        }
-    }
-
-    static void slideLeft(int rows, int col, int x1, int y1, int x2, int y2) {
-        for(int i = x1; i < x2; i++) {
-            map[i][y1] = map[i + 1][y1];
-            if (map[i][y1] < min) {
-                min = map[x1][i];
-            }
-        }
-
-        map[x2 - 1][y1] = subNum;
-        if (subNum < min) {
-            min = subNum;
-        }
     }
 
     static void init(int rows, int columns) {
