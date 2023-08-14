@@ -1,19 +1,23 @@
 import java.util.*;
 
 public class Solution {
+    static int BASE = 1;
     public int solution(int n) {
         int ans = 0;
-        int[] dp = new int[n + 1];
-        dp[1] = 1;
+        int count = 0;
         
-        for(int i = 2; i <= n; i++) {
-            if (i % 2 == 0) {
-                dp[i] = dp[i / 2];
+        while(true) {
+            if (n == 2 || n == 1) {
+                break;
+            }
+            if (n % 2 == 0) {
+                n /= 2;
             } else {
-                dp[i] = dp[i - 1] + 1;
+                n -= 1;
+                count++;
             }
         }
 
-        return dp[n];
+        return BASE + count;
     }
 }
