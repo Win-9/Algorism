@@ -87,8 +87,10 @@ class Solution {
                 if (ch == '*') {
                     answer -= beforeNumFirst;
                     answer += beforeNumFirst * 2;
+                    
                     answer -= beforeNumSecond;
-                    answer += beforeNumSecond * 2;
+                    beforeNumSecond = beforeNumSecond * 2;
+                    answer += beforeNumSecond;
                 } else {
                     answer -= beforeNumSecond;
                     beforeNumSecond = beforeNumSecond * -1;
@@ -102,7 +104,6 @@ class Solution {
                 i++;
                 flag = !flag;
             }
-            System.out.println("anser:" + answer);
             
         }
         
