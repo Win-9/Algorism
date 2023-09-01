@@ -12,13 +12,16 @@ class Solution {
             if (reportMap.get(str[0]) == null) {
                 Id id = new Id(str[0]);
                 id.addReport(str[1]);
+                map.put(str[1], map.getOrDefault(str[1], 0) + 1);
                 reportMap.put(str[0], id);
             } else {
                 Id id = reportMap.get(str[0]);
                 if (!id.getList().contains(str[1])) {
+                    map.put(str[1], map.getOrDefault(str[1], 0) + 1);
                     id.addReport(str[1]);
                 }
             }
+            
         }
         
         List<String> upK = new ArrayList<>();
