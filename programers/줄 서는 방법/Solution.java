@@ -6,7 +6,7 @@ class Solution {
         List<Integer> data = new ArrayList<>();
         int[] result = new int[n];
         int index = 0;
-        int fact = 1;
+        long fact = 1;
         for(int i = 0; i < n; i++) {
             data.add(i + 1);
             fact *= (i + 1);
