@@ -29,7 +29,7 @@ S#
 그렇다면 빌딩은 다음과 같은 그림으로 생긴다.
 
 
-![image](https://github.com/Win-9/Algorism/assets/80390524/c3076f1e-8a80-4268-9d9f-e47b7af4d8d0)   
+![image](https://github.com/Win-9/Algorism/assets/80390524/984b4cc4-bacc-4b05-ad3c-6e9cc65de34a)
 
 > 필자는 그림은 매우 못그리니 양해 부탁한다.   
 
