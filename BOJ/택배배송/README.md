@@ -30,4 +30,4 @@
 다익스트라를 아주 예전에 풀어보아서 구현하는데 다시 참고하면서 풀어보았다.   
 
 특히 시간을 위해서 우선순위 큐를 활용하는 것이 좋다는 것을 알게되었다.   
-(다익스트라 참고)[https://hanmingi.tistory.com/259#google_vignette]
+[다익스트라 참고](https://hanmingi.tistory.com/259#google_vignette)
